@@ -2,278 +2,474 @@
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Dashboard PDRB dan Kesempatan Kerja Provinsi 2021–2025</title>
 <style>
+/* Apple-style app shell: frosted nav + five tabs, borderless white tiles on #f5f5f7, blue only for controls and selection. */
 :root{
   color-scheme:light;
-  --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#898781;
-  --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,.10); --wash:rgba(11,11,11,.045);
-  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --nat:#898781;
+  --bg:#f5f5f7; --tile:#ffffff; --surface:#ffffff; --tile-2:#fafafc;
+  --ink:#1d1d1f; --ink2:#6e6e73; --muted:#6e6e73;
+  --hair:#d2d2d7; --grid:#e8e8ed; --axis:#d2d2d7;
+  --fill:rgba(118,118,128,.12); --fill-strong:rgba(118,118,128,.2); --thumb:#ffffff;
+  --blue:#0071e3; --blue-h:#0062c4; --link:#0066cc; --on-blue:#ffffff;
+  --nav:rgba(251,251,253,.8); --nav-line:rgba(0,0,0,.1); --tip:rgba(255,255,255,.94);
+  --shadow-thumb:0 3px 8px rgba(0,0,0,.12),0 3px 1px rgba(0,0,0,.04);
+  --shadow-tip:0 12px 32px rgba(0,0,0,.14),0 2px 6px rgba(0,0,0,.06);
+  --sel-bg:rgba(0,113,227,.22);
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --nat:#86868b;
   --q1:#2a78d6; --q2:#eda100; --q3:#008300; --q4:#e87ba4;
-  --q1t:#ffffff; --q2t:#0b0b0b; --q3t:#ffffff; --q4t:#0b0b0b;
+  --q1t:#ffffff; --q2t:#1d1d1f; --q3t:#ffffff; --q4t:#1d1d1f;
   --seq0:#cde2fb; --seq1:#9ec5f4; --seq2:#6da7ec; --seq3:#2a78d6; --seq4:#1c5cab; --seq5:#104281;
-  --na:#dcdbd3; --good:#006300; --focus:#2a78d6;
+  --na:#d9d9de;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --r-tile:22px; --r-ctl:10px; --pill:980px;
+  --ease:cubic-bezier(.22,1,.36,1); --spring:cubic-bezier(.3,.7,.2,1);
+  --navh:52px;
 }
 @media (prefers-color-scheme:dark){
   :root:where(:not([data-theme="light"])){
     color-scheme:dark;
-    --page:#0d0d0d; --surface:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --muted:#898781;
-    --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10); --wash:rgba(255,255,255,.06);
-    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --nat:#898781;
+    --bg:#000000; --tile:#1c1c1e; --surface:#1c1c1e; --tile-2:#232325;
+    --ink:#f5f5f7; --ink2:#a1a1a6; --muted:#8e8e93;
+    --hair:#424245; --grid:#2c2c2e; --axis:#3a3a3c;
+    --fill:rgba(118,118,128,.24); --fill-strong:rgba(118,118,128,.36); --thumb:#636366;
+    --blue:#0071e3; --blue-h:#0062c4; --link:#2997ff; --on-blue:#ffffff;
+    --nav:rgba(22,22,23,.78); --nav-line:rgba(255,255,255,.12); --tip:rgba(44,44,46,.92);
+    --shadow-thumb:0 3px 8px rgba(0,0,0,.4),0 3px 1px rgba(0,0,0,.2);
+    --shadow-tip:0 12px 32px rgba(0,0,0,.5),0 2px 6px rgba(0,0,0,.3);
+    --sel-bg:rgba(41,151,255,.35);
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --nat:#8e8e93;
     --q1:#3987e5; --q2:#c98500; --q3:#008300; --q4:#d55181;
     --q1t:#0b0b0b; --q2t:#0b0b0b; --q3t:#ffffff; --q4t:#0b0b0b;
     --seq0:#104281; --seq1:#1c5cab; --seq2:#2a78d6; --seq3:#6da7ec; --seq4:#9ec5f4; --seq5:#cde2fb;
-    --na:#383835; --good:#0ca30c; --focus:#6da7ec;
+    --na:#3a3a3c;
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
-    --page:#0d0d0d; --surface:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --muted:#898781;
-    --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10); --wash:rgba(255,255,255,.06);
-    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --nat:#898781;
+    --bg:#000000; --tile:#1c1c1e; --surface:#1c1c1e; --tile-2:#232325;
+    --ink:#f5f5f7; --ink2:#a1a1a6; --muted:#8e8e93;
+    --hair:#424245; --grid:#2c2c2e; --axis:#3a3a3c;
+    --fill:rgba(118,118,128,.24); --fill-strong:rgba(118,118,128,.36); --thumb:#636366;
+    --blue:#0071e3; --blue-h:#0062c4; --link:#2997ff; --on-blue:#ffffff;
+    --nav:rgba(22,22,23,.78); --nav-line:rgba(255,255,255,.12); --tip:rgba(44,44,46,.92);
+    --shadow-thumb:0 3px 8px rgba(0,0,0,.4),0 3px 1px rgba(0,0,0,.2);
+    --shadow-tip:0 12px 32px rgba(0,0,0,.5),0 2px 6px rgba(0,0,0,.3);
+    --sel-bg:rgba(41,151,255,.35);
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --nat:#8e8e93;
     --q1:#3987e5; --q2:#c98500; --q3:#008300; --q4:#d55181;
     --q1t:#0b0b0b; --q2t:#0b0b0b; --q3t:#ffffff; --q4t:#0b0b0b;
     --seq0:#104281; --seq1:#1c5cab; --seq2:#2a78d6; --seq3:#6da7ec; --seq4:#9ec5f4; --seq5:#cde2fb;
-    --na:#383835; --good:#0ca30c; --focus:#6da7ec;
+    --na:#3a3a3c;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--page);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
-.wrap{max-width:1240px;margin:0 auto;padding:0 16px}
-.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:var(--surface);padding:8px 12px;z-index:100}
-.skip:focus{left:8px;top:8px}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--navh) + 12px);overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.47;letter-spacing:0;-webkit-font-smoothing:antialiased;caret-color:var(--blue);transition:background-color .3s var(--ease),color .3s var(--ease)}
+@supports (font:-apple-system-body){body{letter-spacing:-.016em}}
+::selection{background:var(--sel-bg)}
+*{scrollbar-width:thin;scrollbar-color:var(--hair) transparent}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:var(--hair);border-radius:10px;border:3px solid transparent;background-clip:padding-box}::-webkit-scrollbar-track{background:transparent}
+:focus-visible{outline:3px solid rgba(0,125,250,.6);outline-offset:2px;border-radius:6px}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{text-wrap:balance;font-weight:600}
+button,select,input{font:inherit;color:inherit;letter-spacing:inherit}
+a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline;text-underline-offset:.18em}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-h1,h2,h3{line-height:1.2;margin:0}
-h1{font-size:clamp(24px,3.4vw,36px);font-weight:700;letter-spacing:-.01em}
-h2{font-size:20px;font-weight:650}
-h3{font-size:15px;font-weight:650}
-p{margin:0}
-a{color:var(--s1)}
-.top{border-bottom:1px solid var(--border);background:var(--surface)}
-.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:44px;flex-wrap:wrap}
-.brand{font-size:13px;color:var(--ink2);font-weight:600}
-.btn{font:inherit;font-size:13px;border:1px solid var(--border);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 10px;cursor:pointer}
-.btn:hover{background:var(--wash)}
-.btn[aria-pressed="true"]{border-color:var(--ink2)}
-.hero{padding:28px 0 8px}
-.kicker{font-size:13px;font-weight:650;color:var(--s1);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
-.lede{color:var(--ink2);max-width:72ch;margin-top:8px}
-.herogrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.3fr);gap:16px;margin-top:20px}
-.hero-fig{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px}
-.hero-fig .big{font-size:clamp(48px,7vw,72px);font-weight:700;line-height:1;letter-spacing:-.02em}
-.hero-fig .cap{margin-top:10px;color:var(--ink2);font-size:14px}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.tile{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;min-width:0}
-.tile .l{font-size:12.5px;color:var(--ink2)}
-.tile .v{font-size:24px;font-weight:650;margin-top:2px}
-.tile .v small{font-size:13px;font-weight:500;color:var(--ink2);margin-left:3px}
-.tile .d{font-size:12.5px;color:var(--ink2);margin-top:2px}
-.tile .d b{font-weight:650;color:var(--ink)}
-.howto{margin-top:14px;font-size:13.5px;color:var(--ink2);background:var(--surface);border:1px dashed var(--axis);border-radius:10px;padding:10px 14px}
-.filters{background:var(--page);border-bottom:1px solid var(--border);margin-top:18px}
-@media (min-width:1000px){.filters{position:sticky;top:env(safe-area-inset-top,0px);z-index:20}}
-.filters .wrap{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:flex-end;padding-top:10px;padding-bottom:10px}
-.fl{display:flex;flex-direction:column;gap:2px;font-size:12px;color:var(--ink2);min-width:0}
-.fl select,.fl input[type=range]{font:inherit;font-size:14px;color:var(--ink)}
-select{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:6px 8px;max-width:100%}
-.yr{display:flex;align-items:center;gap:8px}
-.yr input{width:min(220px,40vw);accent-color:var(--s1)}
-.yr output{font-weight:700;font-size:16px;min-width:3.2ch}
-.yrt{display:flex;justify-content:space-between;width:min(220px,40vw);font-size:11px;color:var(--muted);margin-left:36px}
-.card,.hero{scroll-margin-top:84px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;margin-top:18px}
-.card-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;align-items:baseline;margin-bottom:12px}
-.sub{color:var(--ink2);font-size:13.5px}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.chip{font:inherit;font-size:12.5px;border:1px solid var(--border);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 10px;cursor:pointer}
-.chip:hover{background:var(--wash)}
-.chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
-.mapgrid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px}
-.mapbox{min-width:0;position:relative}
-#map{width:100%;height:auto;display:block;background:transparent;aspect-ratio:1000/383;touch-action:manipulation}
-#map .pg path{stroke:var(--surface);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.skip{position:absolute;left:-999px;top:8px;z-index:100;background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:var(--pill)}
+.skip:focus{left:12px}
+svg.ic{width:1em;height:1em;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tnum{font-variant-numeric:tabular-nums}
+
+/* type scale */
+.t-hero{font-size:clamp(36px,5.4vw,56px);line-height:1.07;letter-spacing:-.015em}
+.t-title{font-size:clamp(30px,3.6vw,40px);line-height:1.1;letter-spacing:-.012em}
+.t-h2{font-size:clamp(24px,2.6vw,28px);line-height:1.14;letter-spacing:-.01em}
+.t-h3{font-size:21px;line-height:1.19;letter-spacing:-.008em}
+.t-sub{font-size:clamp(19px,2vw,21px);line-height:1.38;letter-spacing:.004em;font-weight:400;color:var(--ink2);text-wrap:pretty}
+.hero .t-sub{text-wrap:balance}
+.nw{white-space:nowrap}
+.t-ui{font-size:14px;line-height:1.43;letter-spacing:-.01em}
+.t-cap{font-size:12px;line-height:1.4;letter-spacing:-.005em;color:var(--ink2)}
+.ink2{color:var(--ink2)}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:40;background:var(--nav);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid transparent;transition:border-color .25s}
+.nav.scrolled{border-bottom-color:var(--nav-line)}
+.nav-in{max-width:1180px;margin:0 auto;height:var(--navh);display:flex;align-items:center;gap:16px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.brand{font-size:17px;font-weight:600;letter-spacing:-.02em;color:var(--ink);white-space:nowrap;display:flex;align-items:baseline;gap:8px}
+.brand:hover{text-decoration:none}
+.brand small{font-size:12px;font-weight:400;color:var(--ink2);letter-spacing:0}
+.b-short{display:none}
+.nav-tabs{margin:0 auto}
+.nav-r{display:flex;align-items:center;gap:8px;margin-left:auto}
+.icon-btn{width:36px;height:36px;border-radius:50%;border:0;background:transparent;color:var(--ink2);display:grid;place-items:center;font-size:18px;cursor:pointer;transition:background-color .2s,transform .12s}
+.icon-btn:hover{background:var(--fill);color:var(--ink)}
+.icon-btn:active{transform:scale(.94)}
+.selpill{display:flex;align-items:center;gap:7px;max-width:240px;height:32px;padding:0 12px 0 10px;border-radius:var(--pill);border:0;background:var(--fill);color:var(--ink);font-size:13px;font-weight:500;cursor:pointer;transition:background-color .2s,transform .12s}
+.selpill:hover{background:var(--fill-strong)}
+.selpill:active{transform:scale(.97)}
+.selpill span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.selpill .ic{font-size:12px;color:var(--ink2)}
+
+/* segmented control (tabs and toggles share it) */
+.seg{position:relative;display:inline-flex;padding:2px;background:var(--fill);border-radius:9px;isolation:isolate;max-width:100%}
+.seg button{position:relative;z-index:1;border:0;background:transparent;padding:5px 14px;border-radius:7px;font-size:13px;font-weight:500;color:var(--ink);cursor:pointer;white-space:nowrap;transition:opacity .2s}
+.seg button:not([aria-selected="true"]):not([aria-checked="true"]):hover{opacity:.65}
+.seg .thumb{position:absolute;z-index:0;top:2px;bottom:2px;left:0;width:0;border-radius:7px;background:var(--thumb);box-shadow:var(--shadow-thumb);transition:transform .34s var(--spring),width .34s var(--spring)}
+.seg.lg button{font-size:14px;padding:6px 16px}
+
+/* tab bar (phones) */
+.tabbar{display:none}
+@media (max-width:819px){
+  .nav-tabs{display:none}
+  .brand small{display:none}
+  .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--nav);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-top:1px solid var(--nav-line);padding:6px max(6px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px))}
+  .tabbar button{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;color:var(--muted);font-size:10px;font-weight:500;letter-spacing:.01em;cursor:pointer}
+  .tabbar button .ic{font-size:24px;stroke-width:1.7}
+  .tabbar button[aria-selected="true"]{color:var(--blue)}
+  .tabbar button:active{transform:scale(.94)}
+  main{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  .nav-in{gap:10px}
+  .brand{min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .nav-r{min-width:0}
+  .selpill{min-width:0;max-width:none;flex:0 1 auto}
+}
+@media (max-width:420px){.b-long{display:none}.b-short{display:inline}}
+
+/* layout */
+main{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.panel{display:flex;flex-direction:column;gap:20px}
+.panel[hidden]{display:none}
+.panel.enter{animation:panelIn .42s var(--ease)}
+@keyframes panelIn{from{opacity:.35;transform:translateY(10px)}to{opacity:1;transform:none}}
+.panel-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 24px;padding-top:44px}
+.panel-head .t-sub{max-width:62ch}
+.sec-title{margin-top:28px}
+.tile{--pad:28px;background:var(--tile);border-radius:var(--r-tile);padding:var(--pad);min-width:0}
+.tile-head{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.tile-head p{max-width:68ch}
+.note{font-size:13px;line-height:1.45;color:var(--ink2);max-width:90ch}
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
+@media (max-width:640px){.tile{--pad:20px;border-radius:18px}.panel-head{padding-top:28px}}
+
+/* controls */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 22px;border-radius:var(--pill);border:1px solid transparent;font-size:17px;font-weight:400;cursor:pointer;transition:background-color .2s,color .2s,transform .12s;white-space:nowrap}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--blue);color:var(--on-blue)}
+.btn-primary:hover{background:var(--blue-h)}
+.btn-secondary{background:transparent;color:var(--blue);border-color:var(--blue)}
+.btn-secondary:hover{background:var(--blue);color:var(--on-blue)}
+.btn-sm{min-height:34px;padding:0 15px;font-size:14px}
+.btn .ic{font-size:15px}
+.link{display:inline-flex;align-items:center;gap:3px;border:0;background:none;padding:0;color:var(--link);font-size:inherit;cursor:pointer}
+.link .ic{font-size:.8em;stroke-width:2.2}
+.link:hover{text-decoration:underline;text-underline-offset:.18em}
+.select{appearance:none;-webkit-appearance:none;min-height:36px;padding:0 36px 0 16px;border-radius:var(--pill);border:0;background:var(--tile) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2386868b' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center/14px;font-size:14px;font-weight:500;color:var(--ink);cursor:pointer;max-width:100%;box-shadow:inset 0 0 0 1px var(--grid)}
+.select:hover{box-shadow:inset 0 0 0 1px var(--hair)}
+.year{display:flex;align-items:center;gap:12px}
+.year-track{display:flex;flex-direction:column;gap:2px;width:min(260px,52vw)}
+.year-ticks{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);padding:0 2px}
+.year output{font-size:21px;font-weight:600;letter-spacing:-.01em;min-width:3ch}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;cursor:pointer;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:4px;background:linear-gradient(90deg,var(--blue) var(--p,100%),var(--hair) var(--p,100%))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;margin-top:-9px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.25),0 0 0 .5px rgba(0,0,0,.08);transition:transform .15s}
+input[type=range]:active::-webkit-slider-thumb{transform:scale(1.1)}
+input[type=range]::-moz-range-track{height:4px;border-radius:4px;background:var(--hair)}
+input[type=range]::-moz-range-progress{height:4px;border-radius:4px;background:var(--blue)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.round{width:36px;height:36px;border-radius:50%;border:0;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:15px;cursor:pointer;transition:background-color .2s,transform .12s}
+.round:hover{background:var(--blue-h)}.round:active{transform:scale(.94)}
+.scroller{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px;margin:-2px}
+.scroller::-webkit-scrollbar{display:none}
+.chip{flex:none;border:0;border-radius:var(--pill);padding:7px 15px;background:var(--tile);color:var(--ink);font-size:13px;font-weight:500;cursor:pointer;box-shadow:inset 0 0 0 1px var(--grid);transition:background-color .2s,color .2s,transform .12s}
+.chip:hover{box-shadow:inset 0 0 0 1px var(--hair)}
+.chip:active{transform:scale(.97)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);box-shadow:none}
+
+/* ringkasan */
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;padding:64px 0 28px}
+@media (max-width:640px){.hero{padding:36px 0 12px}}
+.hero .t-sub{max-width:44ch}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:8px}
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin:24px calc(-1 * var(--pad)) calc(-1 * var(--pad));border-top:1px solid var(--grid)}
+.stat{padding:18px var(--pad);display:flex;flex-direction:column;gap:2px;min-width:0;border-left:1px solid var(--grid)}
+.stat:first-child{border-left:0}
+.stat .v{font-size:24px;font-weight:600;letter-spacing:-.015em;line-height:1.2}
+.stat .v small{font-size:15px;font-weight:500;color:var(--ink2);margin-left:2px}
+@media (max-width:860px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat{border-left:0;border-top:1px solid var(--grid)}.stat:nth-child(even){border-left:1px solid var(--grid)}.stats .stat:last-child{grid-column:1/-1;border-left:0}.stat:nth-child(-n+2){border-top:0}}
+.finds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.find{display:flex;flex-direction:column;gap:10px}
+.find .fig{font-size:clamp(40px,4.4vw,52px);font-weight:600;letter-spacing:-.02em;line-height:1;margin-bottom:6px}
+.find.lead{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:8px 40px;align-items:center;padding:40px}
+.find.lead .fig{font-size:clamp(64px,8vw,96px);grid-row:span 3}
+.find.lead h3{font-size:28px;letter-spacing:-.012em}
+.find.lead p{font-size:17px}
+.find.lead .link{margin-top:6px}
+.find.wide{grid-column:1/-1}
+.qbadge{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--ink2)}
+@media (max-width:760px){.find.lead{display:flex;align-items:stretch;padding:24px}}
+.find p{font-size:15px;line-height:1.5;color:var(--ink2);letter-spacing:-.01em}
+.find p b{color:var(--ink);font-weight:600}
+.find .link{margin-top:auto;padding-top:8px;font-size:15px}
+@media (max-width:760px){.finds{grid-template-columns:1fr}}
+.lg{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--ink2)}
+.lg .it{display:inline-flex;align-items:center;gap:7px}
+.lk{width:16px;height:0;border-top:2.5px solid var(--s1);border-radius:2px;display:inline-block}
+
+/* peta */
+.map-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:20px;align-items:start}
+.side{display:flex;flex-direction:column;gap:20px;min-width:0}
+#map{width:100%;height:auto;display:block;aspect-ratio:1000/383;touch-action:manipulation}
+#map .pg path{stroke:var(--surface);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .3s var(--ease)}
 #map .pg .fill{cursor:pointer}
+#map .pg:focus-visible{outline:none}
 #map .pg:focus-visible .fill{stroke:var(--ink);stroke-width:2.4}
 #map .hatch{pointer-events:none;stroke:none}
-#map .qlab{font-size:11px;font-weight:700;pointer-events:none;text-anchor:middle;dominant-baseline:central}
-.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--ink2);margin-top:8px;align-items:center}
+#map .qlab{font-weight:700;pointer-events:none;text-anchor:middle;dominant-baseline:central}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:12.5px;color:var(--ink2);margin-top:16px;align-items:center}
 .legend .it{display:inline-flex;align-items:center;gap:6px}
-.sw{width:18px;height:12px;border-radius:3px;display:inline-block;border:1px solid var(--border)}
-.note{font-size:12.5px;color:var(--ink2);margin-top:8px}
-.rank{min-width:0}
-.rank h3{margin-bottom:6px}
-#rankList{max-height:470px;overflow:auto;border:1px solid var(--border);border-radius:10px;padding:4px}
-.rrow{display:grid;grid-template-columns:24px minmax(0,1fr) 96px 54px;gap:6px;align-items:center;width:100%;text-align:left;background:transparent;border:0;border-radius:6px;padding:3px 6px;font:inherit;font-size:13px;color:var(--ink);cursor:pointer}
-.rrow:hover{background:var(--wash)}
-.rrow.sel{background:var(--wash);outline:1.5px solid var(--ink2)}
-.rrow .rn{color:var(--muted);font-size:11.5px;text-align:right}
-.rrow .rname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.rrow .rbar{position:relative;height:10px;background:transparent}
-.rrow .rbar i{position:absolute;top:0;height:10px;background:var(--s1);border-radius:0 4px 4px 0}
+.sw{width:16px;height:12px;border-radius:3px;display:inline-block}
+.insp{display:flex;flex-direction:column;gap:12px}
+.insp .row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.insp .big{font-size:34px;font-weight:600;letter-spacing:-.02em;line-height:1.05}
+.insp .big small{font-size:15px;font-weight:500;color:var(--ink2);margin-left:3px}
+.badge{display:inline-flex;align-items:center;gap:6px;border-radius:var(--pill);padding:4px 11px;background:var(--fill);font-size:12.5px;font-weight:500;color:var(--ink)}
+.kv{display:grid;grid-template-columns:1fr auto;gap:6px 12px;font-size:14px}
+.kv dt{color:var(--ink2)}.kv dd{margin:0;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+#rankList{max-height:max(420px,calc(100vh - 230px));overflow:auto;margin:0 -10px;padding:0 4px}
+.rrow{display:grid;grid-template-columns:22px minmax(0,1fr) 56px 52px;gap:8px;align-items:center;width:100%;text-align:left;background:transparent;border:0;border-radius:10px;padding:6px 6px;font-size:14px;color:var(--ink);cursor:pointer;transition:background-color .15s}
+.rrow:hover{background:var(--fill)}
+.rrow.sel{background:var(--fill-strong)}
+.rrow .rn{color:var(--muted);font-size:12px;text-align:right;font-variant-numeric:tabular-nums}
+.rrow .rname{line-height:1.25}
+.rrow .rbar{position:relative;height:8px}
+.rrow .rbar i{position:absolute;top:0;height:8px;background:var(--s1);border-radius:0 4px 4px 0}
 .rrow .rbar i.neg{border-radius:4px 0 0 4px}
-.rrow .rbar i.clip{background-image:linear-gradient(90deg,transparent 60%,var(--surface) 60%,var(--surface) 70%,transparent 70%)}
-.rrow .rbar b{position:absolute;top:0;width:1px;height:10px;background:var(--axis)}
+.rrow .rbar i.clip{background-image:linear-gradient(90deg,transparent 62%,var(--tile) 62%,var(--tile) 72%,transparent 72%)}
+.rrow .rbar b{position:absolute;top:-2px;width:1px;height:12px;background:var(--axis)}
 .rrow.na{color:var(--muted)}
 .rrow.old .rbar i{opacity:.45}
 .rrow .rval{text-align:right;font-variant-numeric:tabular-nums}
-.rrow .qb{display:inline-flex;align-items:center;gap:5px}
-.sectionlab{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding:8px 6px 2px}
-.scwrap{position:relative}
+.rrow .qb{display:inline-flex;align-items:center}
+.sectionlab{font-size:12px;font-weight:600;color:var(--ink2);padding:14px 8px 4px}
+@media (max-width:1000px){.map-grid{grid-template-columns:minmax(0,1fr)}#rankList{max-height:none;overflow:visible}}
+@media (max-width:560px){.rrow{grid-template-columns:20px minmax(0,1fr) 52px 48px}}
+
+/* kuadran */
 #scatter{width:100%;display:block}
-#scatter text{font-family:inherit}
-.qgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:14px}
-.qcard{border:1px solid var(--border);border-radius:12px;padding:12px;min-width:0}
-.qcard h3{display:flex;align-items:center;gap:8px;font-size:14px}
-.qcard .qn{font-size:12.5px;color:var(--ink2);margin:2px 0 8px}
-.qcard .qm{display:flex;flex-wrap:wrap;gap:4px}
-.mem{font:inherit;font-size:12px;border:1px solid var(--border);background:var(--surface);color:var(--ink);border-radius:6px;padding:2px 7px;cursor:pointer}
-.mem:hover{background:var(--wash)}
-.mem.weak{font-style:italic;color:var(--ink2);border-style:dashed}
-.mem.sel{outline:1.5px solid var(--ink)}
-.prof-head{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-bottom:12px}
-.badge{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);border-radius:999px;padding:3px 10px;font-size:13px;background:var(--surface)}
-.tiles.p{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
-.small-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:16px}
-.chartbox{border:1px solid var(--border);border-radius:12px;padding:10px 12px;min-width:0;position:relative}
-.chartbox h3{font-size:13.5px;margin-bottom:4px}
-.chartbox svg{display:block;width:100%}
-.lg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--ink2);margin:10px 0 0}
-.lg .it{display:inline-flex;align-items:center;gap:6px}
-.lk{width:18px;height:0;border-top:2px solid var(--s1);display:inline-block;border-radius:2px}
-.findings{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-bottom:14px}
-.find{border:1px solid var(--border);border-radius:12px;padding:12px 14px;min-width:0}
-.find .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
-.find h3{margin:2px 0 6px}
-.find p{font-size:13.5px;color:var(--ink2)}
-.find b{color:var(--ink)}
-table{border-collapse:collapse;width:100%;font-size:13px}
-th,td{padding:6px 8px;border-bottom:1px solid var(--grid);text-align:right;white-space:nowrap}
+#scatter text,.chart text{font-family:var(--font)}
+.qgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"q3 q1" "q4 q2";gap:20px}
+.qgrid .tile{display:flex;flex-direction:column;gap:10px}
+.qgrid h3{display:flex;align-items:center;gap:9px}
+.qm{display:flex;flex-wrap:wrap;gap:6px}
+.mem{border:0;border-radius:var(--pill);padding:5px 11px;background:var(--fill);color:var(--ink);font-size:13px;cursor:pointer;transition:background-color .15s,transform .12s}
+.mem:hover{background:var(--fill-strong)}
+.mem:active{transform:scale(.97)}
+.mem.weak{background:transparent;box-shadow:inset 0 0 0 1px var(--hair);font-style:italic;color:var(--ink2)}
+.mem.sel{background:var(--ink);color:var(--bg);box-shadow:none;font-style:normal}
+.mem .ic{font-size:11px;vertical-align:-1px}
+.qhint{font-size:13px;color:var(--ink2)}
+@media (max-width:760px){.qgrid{grid-template-columns:1fr;grid-template-areas:"q1" "q2" "q3" "q4"}}
+.insp-line{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px}
+.insp-line .name{font-size:21px;font-weight:600;letter-spacing:-.01em}
+.insp-line .m{display:flex;flex-direction:column;font-size:12px;color:var(--ink2)}
+.insp-line .m b{font-size:17px;color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.insp-line .link{margin-left:auto;font-size:15px}
+
+/* profil */
+.prof-top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;padding-top:44px}
+.prof-top .t-title{font-size:clamp(34px,4.6vw,48px)}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.spec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--grid);border-radius:var(--r-tile);overflow:hidden}
+.spec .cell{background:var(--tile);padding:20px 22px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.spec .l{font-size:13px;color:var(--ink2)}
+.spec .v{font-size:30px;font-weight:600;letter-spacing:-.018em;line-height:1.12}
+.spec .v small{font-size:15px;font-weight:500;color:var(--ink2);margin-left:3px}
+.spec .d{font-size:12.5px;color:var(--ink2);line-height:1.45}
+.spec .d b{color:var(--ink);font-weight:600}
+@media (max-width:760px){.spec{grid-template-columns:repeat(2,minmax(0,1fr))}.spec .cell:last-child:nth-child(odd){grid-column:1/-1}}
+.small-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.small-grid .tile{padding:22px 22px 14px}
+.small-grid h3{font-size:15px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px}
+.chart svg{display:block;width:100%}
+@media (max-width:1000px){.small-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.small-grid{grid-template-columns:1fr}}
+
+/* tables */
+.tablewrap{overflow:auto;max-height:600px;margin:0 calc(-1 * var(--pad,28px)) calc(-1 * var(--pad,28px));border-top:1px solid var(--grid)}
+.tablewrap.mid{margin-bottom:0}
+.tablewrap.free{max-height:none}
+.tablewrap.more{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent)}
+#mainTable th:first-child,#mainTable td:first-child{position:sticky;left:0;z-index:2;background:var(--tile)}
+#mainTable thead th:first-child{z-index:3}
+.tablewrap.mt{margin-top:12px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{padding:10px 14px;border-bottom:1px solid var(--grid);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{padding-left:var(--pad,28px)}th:last-child,td:last-child{padding-right:var(--pad,28px)}
 th:first-child,td:first-child,th.l,td.l{text-align:left}
-th{font-weight:650;color:var(--ink2);cursor:default;position:sticky;top:0;background:var(--surface)}
-th.sortable{cursor:pointer}
+th{font-size:12px;font-weight:600;color:var(--ink2);position:sticky;top:0;background:var(--tile);z-index:1}
+th.sortable{cursor:pointer;user-select:none}
 th.sortable:hover{color:var(--ink)}
-.tablewrap{overflow:auto;max-height:560px;border:1px solid var(--border);border-radius:10px}
-td.tx{white-space:normal;text-align:left}
-details{margin-top:12px}
-summary{cursor:pointer;font-weight:600;font-size:14px}
-ul.clean{margin:8px 0 0;padding-left:20px;color:var(--ink2);font-size:13.5px}
-ul.clean li{margin:4px 0}
-.tip{position:fixed;z-index:50;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--axis);border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.18);padding:8px 10px;font-size:12.5px;max-width:280px}
+th .ic{font-size:10px;margin-left:3px;vertical-align:0;stroke-width:2.6}
+tbody tr:hover td{background:var(--tile-2)}
+#mainTable tbody tr:hover td:first-child{background:var(--tile-2)}
+tbody tr:last-child td{border-bottom:0}
+details{border-top:1px solid var(--grid);margin-top:20px;padding-top:16px}
+summary{cursor:pointer;font-size:15px;font-weight:600;list-style:none;display:flex;align-items:center;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary .ic{font-size:13px;transition:transform .25s var(--ease);stroke-width:2.2;color:var(--ink2)}
+details[open] summary .ic{transform:rotate(90deg)}
+details .inner{margin-top:14px}
+ul.clean{margin:0;padding-left:20px;color:var(--ink2);font-size:15px;line-height:1.55}
+ul.clean li{margin:6px 0;padding-left:4px}
+.csvbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+
+/* tooltip */
+.tip{position:fixed;z-index:60;pointer-events:none;background:var(--tip);-webkit-backdrop-filter:saturate(180%) blur(16px);backdrop-filter:saturate(180%) blur(16px);color:var(--ink);border-radius:14px;box-shadow:var(--shadow-tip);padding:12px 14px;font-size:13px;line-height:1.45;max-width:290px}
 .tip[hidden]{display:none}
-.tip .tt{font-weight:650;font-size:13px}
-.tip .ts{color:var(--ink2)}
-.tip .tv{font-size:20px;font-weight:700;margin:2px 0}
-.tip .tr{display:flex;align-items:center;gap:6px;color:var(--ink2)}
-.tip .tr b{color:var(--ink);font-weight:650;margin-left:auto;padding-left:10px}
-.tip .tw{margin-top:4px;color:var(--ink2);font-size:12px}
+.tip .tt{font-weight:600;font-size:14px;letter-spacing:-.01em}
+.tip .ts{color:var(--ink2);font-size:12px}
+.tip .tv{font-size:24px;font-weight:600;letter-spacing:-.02em;margin:4px 0 2px}
+.tip .tr{display:flex;align-items:center;gap:7px;color:var(--ink2)}
+.tip .tr b{color:var(--ink);font-weight:600;margin-left:auto;padding-left:12px;font-variant-numeric:tabular-nums}
+.tip .tw{margin-top:6px;color:var(--ink2);font-size:12px}
 .tip .lk{width:12px}
-.csvbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-footer{padding:20px 0 40px;font-size:13px;color:var(--ink2)}
-footer a{word-break:break-word}
-.fade{opacity:.55;transition:opacity .2s}
-@media (max-width:980px){
-  .mapgrid{grid-template-columns:minmax(0,1fr)}
-  .herogrid{grid-template-columns:minmax(0,1fr)}
-  #rankList{max-height:380px}
-}
-@media (max-width:560px){
-  .card{padding:12px}
-  .filters .wrap{gap:8px 12px}
-  .yr input,.yrt{width:150px}
-  .rrow{grid-template-columns:20px minmax(0,1fr) 70px 48px}
-}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}#map .pg path{transition:none}}
-@media print{.filters,.top .btn,.csvbar,#playBtn{display:none}.card{break-inside:avoid}}
+
+footer{max-width:1180px;margin:0 auto;padding:28px max(20px,env(safe-area-inset-right,0px)) 40px max(20px,env(safe-area-inset-left,0px));font-size:12px;line-height:1.5;color:var(--ink2);border-top:1px solid var(--hair)}
+footer p+p{margin-top:6px}
+@media (max-width:819px){footer{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}}
+
+@media (prefers-reduced-motion:reduce){.panel.enter{animation:none}.seg .thumb{transition:none}#map .pg path{transition:none}body{transition:none}*{scroll-behavior:auto}}
+@media (prefers-reduced-transparency:reduce){.nav,.tabbar,.tip{background:var(--tile);-webkit-backdrop-filter:none;backdrop-filter:none}}
+@media (prefers-contrast:more){.tile{box-shadow:inset 0 0 0 1px var(--hair)}.chip,.select{box-shadow:inset 0 0 0 1px var(--ink2)}}
+@media print{.nav,.tabbar,.csvbar,.toolbar{display:none}.panel[hidden]{display:flex!important}.tile{break-inside:avoid}}
 </style>
 </head>
 <body>
-<a class="skip" href="#peta">Lewati ke peta</a>
-<header class="top"><div class="wrap">
-  <div class="brand">ACTION 2026 · Infografis Tingkat Mahasiswa · Dashboard analisis</div>
-  <button class="btn" id="themeBtn" type="button" aria-label="Ganti tema tampilan">Tema: otomatis</button>
-</div></header>
+<script>/* tema tersimpan dipasang sebelum halaman tergambar, supaya tidak berkedip dari tema sistem */try{var t=localStorage.getItem('tema');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<a class="skip" href="#main">Lewati ke konten</a>
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#ringkasan" data-go="ringkasan"><span class="b-long">PDRB &amp; Lapangan Kerja</span><span class="b-short">PDRB &amp; Kerja</span> <small>2021–2025</small></a>
+    <div class="seg nav-tabs" role="tablist" aria-label="Bagian dashboard" id="tabsTop"></div>
+    <div class="nav-r">
+      <button class="selpill" id="selPill" type="button" aria-label="Buka profil provinsi terpilih"></button>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Ganti tema"></button>
+    </div>
+  </div>
+</header>
 
-<main class="wrap">
+<main id="main">
 <noscript><p class="note">Dashboard ini memerlukan JavaScript.</p></noscript>
-<section class="hero" id="ringkas" aria-labelledby="h1">
-  <p class="kicker">Ekonomi tumbuh, apakah lapangan kerja ikut tumbuh?</p>
-  <h1 id="h1">Pertumbuhan PDRB dan penyerapan tenaga kerja di provinsi Indonesia, 2021–2025</h1>
-  <p class="lede" id="lede"></p>
-  <div class="herogrid">
-    <div class="hero-fig"><div class="big" id="heroBig"></div><p class="cap" id="heroCap"></p></div>
-    <div class="tiles" id="kpi"></div>
+
+<section class="panel" id="ringkasan" role="tabpanel" aria-labelledby="tab-ringkasan">
+  <div class="hero">
+    <h1 class="t-hero" id="heroTitle"></h1>
+    <p class="t-sub" id="heroSub"></p>
+    <div class="actions"><button class="btn btn-primary" type="button" data-go="peta">Lihat peta</button><button class="btn btn-secondary" type="button" data-go="profil">Cari provinsi</button></div>
   </div>
-  <p class="howto"><b>Cara memakai:</b> pilih indikator dan geser tahun pada baris filter untuk mengubah peta. Klik provinsi di peta, di daftar peringkat, atau di diagram kuadran untuk membuka profilnya. Semua angka juga tersedia di bagian <a href="#tabel">Tabel data</a>.</p>
-</section>
-
-<div class="filters" id="filters" role="region" aria-label="Filter"><div class="wrap">
-  <label class="fl">Indikator peta<select id="selMetrik" autocomplete="off"></select></label>
-  <div class="fl"><span>Tahun (Agustus untuk data ketenagakerjaan)</span>
-    <div class="yr"><button class="btn" id="playBtn" type="button" aria-label="Putar animasi tahun">▶</button>
-      <input type="range" id="yr" min="2021" max="2025" step="1" value="2025" aria-label="Tahun" autocomplete="off"><output id="yrOut" for="yr">2025</output></div>
-    <div class="yrt" aria-hidden="true"><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span></div></div>
-  <label class="fl">Peta menampilkan<select id="selMode" autocomplete="off"><option value="metrik">Nilai indikator</option><option value="kuadran">Tipologi kuadran</option></select></label>
-  <label class="fl">Sumbu Y kuadran<select id="selY" autocomplete="off"><option value="cagr_bekerja">Pertumbuhan penduduk bekerja (CAGR)</option><option value="delta_epr">Perubahan rasio bekerja-penduduk (Δ EPR)</option></select></label>
-</div></div>
-
-<section class="card" id="peta" aria-labelledby="hPeta">
-  <div class="card-h"><h2 id="hPeta">Peta provinsi</h2><p class="sub" id="mapSub"></p></div>
-  <div class="chips" id="regionChips" role="group" aria-label="Zoom wilayah"></div>
-  <div class="mapgrid">
-    <div class="mapbox"><svg id="map" role="group" aria-label="Peta 38 provinsi Indonesia"></svg>
-      <div class="legend" id="mapLegend"></div><p class="note" id="mapNote"></p></div>
-    <aside class="rank" aria-label="Peringkat provinsi"><h3 id="rankTitle"></h3><div id="rankList"></div></aside>
+  <div class="tile">
+    <div class="tile-head"><h2 class="t-h3">Indonesia, 2021–2025</h2><p class="t-ui ink2" id="natLead"></p></div>
+    <div class="lg" id="natLegend"></div>
+    <div class="chart" id="natChart" style="margin-top:8px"></div>
+    <p class="note" id="natNote" style="margin-top:10px"></p>
+    <div class="stats" id="kpi"></div>
+  </div>
+  <h2 class="t-title sec-title">Yang ditemukan</h2>
+  <div class="finds" id="findings"></div>
+  <div class="tile">
+    <h2 class="t-h3" style="margin-bottom:8px">Cara membaca</h2>
+    <p class="t-ui ink2" style="max-width:80ch">Kuadran membandingkan laju PDRB tiap provinsi dengan pertumbuhan jumlah penduduk bekerja terhadap angka nasional pada periode 2023–2025. Label kuat berarti posisi provinsi tetap pada sebagian besar tahun dan tidak berubah saat sumbu Y diganti. Semua temuan bersifat deskriptif, bukan sebab-akibat.</p>
+    <p style="margin-top:12px"><button class="link" type="button" data-go="data">Metode dan keterbatasan</button></p>
   </div>
 </section>
 
-<section class="card" id="kuadran" aria-labelledby="hKuadran">
-  <div class="card-h"><h2 id="hKuadran">Tipologi kuadran: pertumbuhan PDRB vs penyerapan kerja</h2><p class="sub" id="scSub"></p></div>
-  <div class="lg" id="scLegend"></div>
-  <div class="scwrap" id="scatterBox"><svg id="scatter" role="img" aria-label="Diagram sebar kuadran provinsi"></svg></div>
-  <p class="note" id="scNote"></p>
+<section class="panel" id="peta" role="tabpanel" aria-labelledby="tab-peta" hidden>
+  <div class="panel-head"><h1 class="t-title">Peta provinsi</h1><p class="t-sub" id="mapSub"></p></div>
+  <div class="toolbar">
+    <label><span class="sr">Indikator</span><select class="select" id="selMetrik" autocomplete="off"></select></label>
+    <div class="seg" id="segMode" role="radiogroup" aria-label="Isi peta"></div>
+    <div class="year" id="yearCtl">
+      <button class="round" id="playBtn" type="button" aria-label="Putar tahun"></button>
+      <div class="year-track"><input type="range" id="yr" min="2021" max="2025" step="1" value="2025" aria-label="Tahun" autocomplete="off"><div class="year-ticks" aria-hidden="true"><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span></div></div>
+      <output id="yrOut" for="yr" class="tnum">2025</output>
+    </div>
+  </div>
+  <div class="scroller" id="regionChips" role="group" aria-label="Perbesar wilayah"></div>
+  <div class="map-grid">
+    <div class="tile">
+      <svg id="map" role="group" aria-label="Peta 38 provinsi Indonesia"></svg>
+      <div class="legend" id="mapLegend"></div>
+      <p class="note" id="mapNote" style="margin-top:12px"></p>
+    </div>
+    <aside class="side" aria-label="Provinsi terpilih dan peringkat">
+      <div class="tile insp" id="mapInsp"></div>
+      <div class="tile"><h2 class="t-ui" style="font-weight:600;margin-bottom:10px" id="rankTitle"></h2><div id="rankList"></div></div>
+    </aside>
+  </div>
+</section>
+
+<section class="panel" id="kuadran" role="tabpanel" aria-labelledby="tab-kuadran" hidden>
+  <div class="panel-head"><h1 class="t-title">Tipologi kuadran</h1><p class="t-sub" id="scSub"></p></div>
+  <div class="toolbar"><span class="t-ui ink2">Sumbu Y</span><div class="seg" id="segY" role="radiogroup" aria-label="Ukuran sumbu Y"></div></div>
+  <div class="tile">
+    <div class="lg" id="scLegend"></div>
+    <div id="scatterBox" style="margin-top:10px"><svg id="scatter" role="img" aria-label="Diagram sebar kuadran provinsi"></svg></div>
+    <p class="note" id="scNote" style="margin-top:12px"></p>
+  </div>
+  <div class="tile insp-line" id="scInsp"></div>
+  <h2 class="t-h2 sec-title">Anggota kuadran</h2>
+  <p class="qhint">Susunan mengikuti diagram: atas berarti penyerapan kerja tinggi, kanan berarti PDRB tinggi. Nama miring bergaris tepi adalah label lemah.</p>
   <div class="qgrid" id="qCards"></div>
+  <div class="tile">
+    <div class="tile-head"><h2 class="t-h3">Struktur ekonomi per kuadran</h2><p class="t-ui ink2">Median tiap kuadran. Eksploratif: sebaran antarkuadran tumpang tindih dan jumlah provinsi per kuadran kecil.</p></div>
+    <div class="tablewrap mid"><table id="medTable"></table></div>
+    <details><summary><svg class="ic" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg>Korelasi Spearman struktur ekonomi dengan penyerapan kerja dan TPT</summary>
+      <div class="inner"><p class="note" id="spNote"></p><div class="tablewrap mt"><table id="spTable"></table></div></div></details>
+  </div>
 </section>
 
-<section class="card" id="profil" aria-labelledby="hProfil">
-  <div class="card-h"><h2 id="hProfil">Profil provinsi</h2>
-    <label class="fl" style="flex-direction:row;align-items:center;gap:8px">Provinsi <select id="selProv" autocomplete="off"></select></label></div>
-  <div id="profHead" class="prof-head"></div>
-  <div class="tiles p" id="profTiles"></div>
+<section class="panel" id="profil" role="tabpanel" aria-labelledby="tab-profil" hidden>
+  <div class="prof-top">
+    <div><h1 class="t-title" id="profName"></h1><div class="badges" id="profHead"></div></div>
+    <label><span class="sr">Pilih provinsi</span><select class="select" id="selProv" autocomplete="off"></select></label>
+  </div>
+  <div class="spec" id="profTiles"></div>
   <div class="lg" id="profLegend"></div>
   <div class="small-grid" id="profCharts"></div>
   <p class="note" id="profNote"></p>
 </section>
 
-<section class="card" id="hasil" aria-labelledby="hHasil">
-  <div class="card-h"><h2 id="hHasil">Ringkasan hasil analisis</h2><p class="sub">Dihitung dari data pada dashboard ini dan dari Notebook Analisis 4</p></div>
-  <div class="findings" id="findings"></div>
-  <div class="chartbox" id="natBox"><h3>Indonesia: pertumbuhan ekonomi, pertumbuhan pekerja, dan pengangguran</h3>
-    <div class="lg" id="natLegend"></div><div id="natChart"></div>
-    <p class="note" id="natNote"></p></div>
-  <h3 style="margin-top:18px">Struktur ekonomi dan kualitas kerja per kuadran (median)</h3>
-  <p class="sub">Eksploratif: sebaran antarkuadran saling tumpang tindih dan kuadran berisi sedikit provinsi.</p>
-  <div class="tablewrap" style="margin-top:8px"><table id="medTable"></table></div>
-  <details><summary>Korelasi Spearman struktur ekonomi dengan penyerapan kerja dan TPT (Notebook Analisis 4)</summary>
-    <p class="sub" style="margin-top:6px" id="spNote"></p><div class="tablewrap" style="margin-top:8px"><table id="spTable"></table></div></details>
-  <details><summary>Papua Raya: enam provinsi Papua digabung dari level</summary><div class="tablewrap" style="margin-top:8px"><table id="prTable"></table></div><p class="note" id="prNote"></p></details>
-  <details open><summary>Cara membaca dan keterbatasan</summary><ul class="clean" id="limits"></ul></details>
-</section>
-
-<section class="card" id="tabel" aria-labelledby="hTabel">
-  <div class="card-h"><h2 id="hTabel">Tabel data</h2><p class="sub">Klik judul kolom untuk mengurutkan. Nilai tidak tersedia ditulis “–”.</p></div>
-  <div class="csvbar"><button class="btn" id="csvProv" type="button">Unduh tabel provinsi (CSV)</button><button class="btn" id="csvPanel" type="button">Unduh panel tahunan (CSV)</button></div>
-  <div class="tablewrap"><table id="mainTable"></table></div>
+<section class="panel" id="data" role="tabpanel" aria-labelledby="tab-data" hidden>
+  <div class="panel-head"><h1 class="t-title">Data dan metode</h1><p class="t-sub">Semua angka di dashboard ini, cara menghitungnya, dan batasnya.</p></div>
+  <div class="tile">
+    <div class="tile-head"><h2 class="t-h3">Tabel provinsi</h2><p class="t-ui ink2">Klik judul kolom untuk mengurutkan. Nilai yang tidak tersedia ditulis “–”.</p></div>
+    <div class="csvbar"><button class="btn btn-secondary btn-sm" id="csvProv" type="button"></button><button class="btn btn-secondary btn-sm" id="csvPanel" type="button"></button></div>
+    <div class="tablewrap free"><table id="mainTable"></table></div>
+  </div>
+  <div class="tile">
+    <div class="tile-head"><h2 class="t-h3">Papua Raya</h2><p class="t-ui ink2">Enam provinsi Papua digabung dari level agar batas wilayahnya tetap sepanjang periode.</p></div>
+    <div class="tablewrap mid"><table id="prTable"></table></div>
+    <p class="note" id="prNote" style="margin-top:16px"></p>
+  </div>
+  <div class="tile"><h2 class="t-h3" style="margin-bottom:12px">Cara membaca dan keterbatasan</h2><ul class="clean" id="limits"></ul></div>
+  <div class="tile">
+    <h2 class="t-h3" style="margin-bottom:12px">Sumber</h2>
+    <ul class="clean">
+      <li>Badan Pusat Statistik (bps.go.id): Laju Pertumbuhan PDRB ADHK 2010 menurut provinsi; PDRB (milyar rupiah) ADHB dan ADHK 2010; PDRB triwulanan ADHK menurut lapangan usaha provinsi; Sakernas Agustus 2021–2025 (TPT, TPAK, jenis kegiatan, status pekerjaan, lapangan usaha); proporsi lapangan kerja informal; tingkat setengah pengangguran. Diolah dengan Notebook Analisis 4.</li>
+      <li>Peta: <a href="https://github.com/denyherianto/indonesia-geojson-topojson-maps-with-38-provinces" rel="noopener">GeoJSON 38 provinsi (denyherianto, CC BY 4.0)</a>. Sumber asli batas wilayahnya tidak dinyatakan penyedia, sehingga peta ini ilustratif dan bukan batas resmi.</li>
+    </ul>
+  </div>
 </section>
 </main>
 
-<footer><div class="wrap">
-  <p><b>Sumber data:</b> Badan Pusat Statistik (bps.go.id): Laju Pertumbuhan PDRB ADHK 2010 menurut provinsi; PDRB (milyar rupiah) ADHB dan ADHK 2010; PDRB triwulanan ADHK menurut lapangan usaha provinsi; Sakernas Agustus 2021–2025 (TPT, TPAK, jenis kegiatan, status pekerjaan, lapangan usaha); proporsi lapangan kerja informal; tingkat setengah pengangguran. Diolah dengan Notebook Analisis 4.</p>
-  <p style="margin-top:6px"><b>Peta:</b> <a href="https://github.com/denyherianto/indonesia-geojson-topojson-maps-with-38-provinces" rel="noopener">GeoJSON 38 provinsi (denyherianto, CC BY 4.0)</a>. Sumber asli batas wilayahnya tidak dinyatakan oleh penyedia, sehingga peta ini hanya ilustratif dan bukan batas resmi.</p>
-  <p style="margin-top:6px">Kuadran dan klaster bersifat deskriptif dan eksploratif, bukan bukti sebab-akibat. Data Sakernas adalah estimasi survei dengan galat sampling.</p>
-</div></footer>
+<footer>
+  <p>Data: Badan Pusat Statistik, diolah. Kuadran dan klaster bersifat deskriptif, bukan bukti sebab-akibat. Data Sakernas adalah estimasi survei dengan galat sampling.</p>
+  <p>ACTION 2026 · Infografis Tingkat Mahasiswa · Peta ilustratif, GeoJSON CC BY 4.0.</p>
+</footer>
 
+<nav class="tabbar" id="tabsBottom" role="tablist" aria-label="Bagian dashboard"></nav>
 <div id="tip" class="tip" role="tooltip" hidden></div>
 <div id="live" class="sr" aria-live="polite"></div>
 
@@ -284,6 +480,7 @@ footer a{word-break:break-word}
 const D=window.__DATA__,G=window.__GEO__,EX=window.__EXTRA__;
 const NS='http://www.w3.org/2000/svg';
 const $=(q,r)=>(r||document).querySelector(q);
+const $$=(q,r)=>[...(r||document).querySelectorAll(q)];
 function mk(ns,tag,p,kids){
   const e=ns?document.createElementNS(NS,tag):document.createElement(tag);
   for(const[a,v]of Object.entries(p||{})){
@@ -302,6 +499,27 @@ const fmtS=(v,d=2)=>v==null||!isFinite(v)?'–':(v>0?'+':v<0?'−':'')+fmt(Math.
 const YEARS=[2021,2022,2023,2024,2025], LAST=2025;
 const median=a=>{const b=a.filter(x=>x!=null&&isFinite(x)).sort((x,y)=>x-y);if(!b.length)return null;const m=b.length>>1;return b.length%2?b[m]:(b[m-1]+b[m])/2};
 const quantile=(sorted,q)=>{const i=(sorted.length-1)*q,lo=Math.floor(i),hi=Math.ceil(i);return sorted[lo]+(sorted[hi]-sorted[lo])*(i-lo)};
+
+/* ---------- ikon (SVG, satu ketebalan garis) ---------- */
+const ICONS={
+  ringkasan:'<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>',
+  peta:'<path d="M9 4 3.5 6v14L9 18l6 2 5.5-2V4L15 6 9 4Z"/><path d="M9 4v14M15 6v14"/>',
+  kuadran:'<path d="M4 4v16h16"/><circle cx="9" cy="14" r="1.6"/><circle cx="13" cy="9" r="1.6"/><circle cx="17.5" cy="12" r="1.6"/><circle cx="16" cy="6" r="1.6"/>',
+  profil:'<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 1 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/>',
+  data:'<rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><path d="M3.5 9.5h17M3.5 14.5h17M9.5 9.5v10"/>',
+  chev:'<path d="m9 6 6 6-6 6"/>',
+  up:'<path d="m6 15 6-6 6 6"/>',down:'<path d="m6 9 6 6 6-6"/>',
+  play:'<path d="M8 5.5v13l10.5-6.5L8 5.5Z" fill="currentColor" stroke="none"/>',
+  pause:'<rect x="6.5" y="5.5" width="3.6" height="13" rx="1.2" fill="currentColor" stroke="none"/><rect x="13.9" y="5.5" width="3.6" height="13" rx="1.2" fill="currentColor" stroke="none"/>',
+  download:'<path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/>',
+  auto:'<circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none"/>',
+  light:'<circle cx="12" cy="12" r="4"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/>',
+  dark:'<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/>',
+  star:'<path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8L12 3.6Z" fill="currentColor"/>',
+  pin:'<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 1 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/>'
+};
+function icon(name,cls){const s=sv('svg',{class:'ic'+(cls?' '+cls:''),viewBox:'0 0 24 24','aria-hidden':'true'});s.innerHTML=ICONS[name];return s}
+const chevLink=(label,onclick)=>h('button',{class:'link',type:'button',onclick},[label,icon('chev')]);
 
 /* ---------- data ---------- */
 const PROV=D.provinsi, NAMES=PROV.map(p=>p.provinsi);
@@ -343,55 +561,112 @@ function getVal(name,m,y){
 }
 function binsFor(m){
   const vals=[];for(const n of NAMES)for(const y of YEARS){const v=getVal(n,m,y);if(v!=null&&!oldB(n,m,y))vals.push(v)}
-  vals.sort((a,b)=>a-b);const e=[];for(let i=1;i<6;i++){const q=quantile(vals,i/6);e.push(q)}
+  vals.sort((a,b)=>a-b);const e=[];for(let i=1;i<6;i++)e.push(quantile(vals,i/6));
   return e;
 }
 const BINS={};for(const m of Object.keys(METRIK))BINS[m]=binsFor(m);
 const binIdx=(m,v)=>{const e=BINS[m];let i=0;while(i<e.length&&v>e[i])i++;return i};
+const unitOf=M=>M.unit==='%'?'%':' '+M.unit;
 
 const QD={
-  Q1:{nama:'PDRB tinggi · kerja tinggi',kecil:'Tumbuh dan menyerap kerja',shape:'circle'},
-  Q2:{nama:'PDRB tinggi · kerja rendah',kecil:'Tumbuh, serapan kerja lambat',shape:'square'},
-  Q3:{nama:'PDRB rendah · kerja tinggi',kecil:'Tumbuh lambat, serapan kerja tinggi',shape:'triangle'},
-  Q4:{nama:'PDRB rendah · kerja rendah',kecil:'Tumbuh dan serapan kerja lambat',shape:'diamond'}
+  Q1:{nama:'PDRB tinggi · kerja tinggi',shape:'circle'},
+  Q2:{nama:'PDRB tinggi · kerja rendah',shape:'square'},
+  Q3:{nama:'PDRB rendah · kerja tinggi',shape:'triangle'},
+  Q4:{nama:'PDRB rendah · kerja rendah',shape:'diamond'}
 };
-const YM={cagr_bekerja:{label:'CAGR penduduk bekerja (%/tahun)',short:'Pertumbuhan penduduk bekerja (CAGR)',dec:2,thr:()=>D.meta.ambang_y,unit:'%/tahun'},
-  delta_epr:{label:'Perubahan EPR (poin persen/tahun)',short:'Perubahan EPR',dec:2,thr:()=>natDeltaEPR,unit:'pp/tahun'}};
-const state={tahun:LAST,metrik:'laju_pdrb',mode:'metrik',ymode:'cagr_bekerja',sel:'Sulawesi Tengah',region:'Semua'};
+const YM={cagr_bekerja:{label:'CAGR penduduk bekerja (%/tahun)',short:'Pertumbuhan penduduk bekerja',seg:'Pertumbuhan pekerja',thr:()=>D.meta.ambang_y,unit:'%/tahun'},
+  delta_epr:{label:'Perubahan EPR (poin persen/tahun)',short:'Perubahan EPR',seg:'Perubahan EPR',thr:()=>natDeltaEPR,unit:'poin/tahun'}};
+const TABS=[['ringkasan','Ringkasan'],['peta','Peta'],['kuadran','Kuadran'],['profil','Profil'],['data','Data']];
+const state={tab:'ringkasan',tahun:LAST,metrik:'laju_pdrb',mode:'metrik',ymode:'cagr_bekerja',sel:'Sulawesi Tengah',region:'Semua'};
 const quadOf=(x,y)=>x>=BX?(y>=YM[state.ymode].thr()?'Q1':'Q2'):(y>=YM[state.ymode].thr()?'Q3':'Q4');
 const qOfProv=p=>p.kuadran?quadOf(p.X,p[state.ymode]):null;
 const rayaQ=()=>quadOf(RAYA.X,RAYA[state.ymode]);
+const selQuad=n=>n==='Papua Raya'?rayaQ():(byName[n]&&byName[n].kuadran?qOfProv(byName[n]):null);
 
 function qIcon(q,size){
   const s=size||12,c=s/2,col=`var(--${q.toLowerCase()})`;
   const svg=sv('svg',{width:s,height:s,viewBox:`0 0 ${s} ${s}`,'aria-hidden':'true',style:'flex:none'});
   const sh=QD[q].shape;
   if(sh==='circle')svg.append(sv('circle',{cx:c,cy:c,r:c-1,fill:col}));
-  else if(sh==='square')svg.append(sv('rect',{x:1,y:1,width:s-2,height:s-2,fill:col}));
+  else if(sh==='square')svg.append(sv('rect',{x:1,y:1,width:s-2,height:s-2,rx:1.5,fill:col}));
   else if(sh==='triangle')svg.append(sv('polygon',{points:`${c},1 ${s-1},${s-1} 1,${s-1}`,fill:col}));
-  else svg.append(sv('polygon',{points:`${c},1 ${s-1},${c} ${c},${s-1} 1,${c}`,fill:col}));
+  else svg.append(sv('polygon',{points:`${c},.5 ${s-.5},${c} ${c},${s-.5} .5,${c}`,fill:col}));
   return svg;
 }
 function shapeEl(q,cx,cy,r,extra){
   const col=`var(--${q.toLowerCase()})`,sh=QD[q].shape;const a=Object.assign({fill:col,stroke:'var(--surface)','stroke-width':2},extra||{});
   if(sh==='circle')return sv('circle',Object.assign({cx,cy,r},a));
-  if(sh==='square')return sv('rect',Object.assign({x:cx-r,y:cy-r,width:2*r,height:2*r},a));
+  if(sh==='square')return sv('rect',Object.assign({x:cx-r,y:cy-r,width:2*r,height:2*r,rx:1.5},a));
   if(sh==='triangle')return sv('polygon',Object.assign({points:`${cx},${cy-r*1.2} ${cx+r*1.1},${cy+r*.9} ${cx-r*1.1},${cy+r*.9}`},a));
   return sv('polygon',Object.assign({points:`${cx},${cy-r*1.25} ${cx+r*1.25},${cy} ${cx},${cy+r*1.25} ${cx-r*1.25},${cy}`},a));
 }
+const starPts=(cx,cy,R)=>[0,1,2,3,4,5,6,7,8,9].map(i=>{const a=-Math.PI/2+i*Math.PI/5,q=i%2?R*.42:R;return(cx+q*Math.cos(a)).toFixed(1)+','+(cy+q*Math.sin(a)).toFixed(1)}).join(' ');
+const qBadge=q=>h('span',{class:'badge'},[qIcon(q,11),`${q} · ${QD[q].nama}`]);
 
 /* ---------- tooltip ---------- */
 const tip=$('#tip');
 function showTip(ev,nodes){
   tip.replaceChildren(...nodes);tip.hidden=false;
-  const pad=14,r=tip.getBoundingClientRect();let x=ev.clientX+pad,y=ev.clientY+pad;
+  const pad=16,r=tip.getBoundingClientRect();let x=ev.clientX+pad,y=ev.clientY+pad;
   if(x+r.width>innerWidth-8)x=ev.clientX-r.width-pad;if(x<8)x=8;
   if(y+r.height>innerHeight-8)y=Math.max(8,ev.clientY-r.height-pad);
   tip.style.left=x+'px';tip.style.top=y+'px';
 }
 const hideTip=()=>{tip.hidden=true};
-const rowTip=(label,val,keyCol,dash)=>h('div',{class:'tr'},[keyCol?h('span',{class:'lk',style:`border-top-color:${keyCol}${dash?';border-top-style:dashed':''}`}):null,h('span',{text:label}),h('b',{text:val})]);
+const rowTip=(label,val,keyCol)=>h('div',{class:'tr'},[keyCol?h('span',{class:'lk',style:`border-top-color:${keyCol}`}):null,h('span',{text:label}),h('b',{text:val})]);
 function say(t){$('#live').textContent=t}
+
+/* ---------- kontrol bersegmen ---------- */
+function placeThumb(el){
+  const th=el.querySelector('.thumb'),on=el.querySelector('[aria-selected="true"],[aria-checked="true"]');
+  if(!th||!on||!on.offsetWidth)return;
+  const first=!th.dataset.ready;if(first)th.style.transition='none';
+  th.style.width=on.offsetWidth+'px';th.style.transform=`translateX(${on.offsetLeft}px)`;
+  if(first){void th.offsetWidth;th.style.transition='';th.dataset.ready='1'}
+}
+function segmented(el,opts,value,onChange,cls){
+  el.replaceChildren(h('span',{class:'thumb','aria-hidden':'true'}));
+  if(cls)el.classList.add(cls);
+  opts.forEach(([v,label])=>{
+    const b=h('button',{type:'button',role:'radio','aria-checked':String(v===value),'data-v':v,tabindex:v===value?0:-1,text:label,
+      onclick:()=>{if(b.getAttribute('aria-checked')==='true')return;$$('button',el).forEach(x=>{x.setAttribute('aria-checked',String(x===b));x.tabIndex=x===b?0:-1});placeThumb(el);onChange(v)}});
+    el.append(b);
+  });
+  el.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key))return;const bs=$$('button',el),i=bs.indexOf(document.activeElement);if(i<0)return;e.preventDefault();const n=bs[(i+(e.key==='ArrowRight'?1:bs.length-1))%bs.length];n.focus();n.click()});
+  requestAnimationFrame(()=>placeThumb(el));
+}
+function setSeg(el,value){$$('button',el).forEach(x=>{const on=x.dataset.v===value;x.setAttribute('aria-checked',String(on));x.tabIndex=on?0:-1});placeThumb(el)}
+
+/* ---------- tab ---------- */
+function buildTabs(){
+  const top=$('#tabsTop'),bot=$('#tabsBottom');
+  top.replaceChildren(h('span',{class:'thumb','aria-hidden':'true'}));
+  TABS.forEach(([id,label])=>{
+    top.append(h('button',{type:'button',role:'tab',id:'tab-'+id,'aria-controls':id,'aria-selected':'false',tabindex:-1,'data-tab':id,text:label,onclick:()=>go(id)}));
+    bot.append(h('button',{type:'button',role:'tab','aria-controls':id,'aria-selected':'false',tabindex:-1,'data-tab':id,onclick:()=>go(id)},[icon(id),h('span',{text:label})]));
+  });
+  [top,bot].forEach(list=>list.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();const i=TABS.findIndex(t=>t[0]===state.tab),n=TABS[(i+(e.key==='ArrowRight'?1:TABS.length-1))%TABS.length][0];go(n);$(`[data-tab="${n}"]`,list).focus()}));
+}
+function go(id,opts){
+  if(!TABS.some(t=>t[0]===id))id='ringkasan';
+  const changed=id!==state.tab;state.tab=id;
+  TABS.forEach(([t])=>{const p=$('#'+t);p.hidden=t!==id;if(t===id&&changed){p.classList.remove('enter');void p.offsetWidth;p.classList.add('enter')}});
+  $$('[data-tab]').forEach(b=>{const on=b.dataset.tab===id;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1});
+  placeThumb($('#tabsTop'));
+  try{history.replaceState(null,'','#'+id)}catch(e){}
+  if(!(opts&&opts.keepScroll))window.scrollTo(0,0);
+  hideTip();renderPanel(id);
+  $$('.seg',$('#'+id)).forEach(placeThumb);
+}
+function renderPanel(id){
+  if(id==='ringkasan')drawNational();
+  else if(id==='peta'){updateMap();renderMapInsp()}
+  else if(id==='kuadran'){renderScatter();renderScInsp();renderQCards()}
+  else if(id==='profil')renderProfile();
+  requestAnimationFrame(()=>$$('.tablewrap').forEach(fadeEdge));
+}
+/* tepi kanan memudar selama masih ada kolom tersembunyi */
+function fadeEdge(w){w.classList.toggle('more',w.scrollWidth-w.clientWidth-w.scrollLeft>2)}
 
 /* ---------- peta ---------- */
 const LON0=94.5,LAT0=6.5,SC=1000/47;
@@ -410,15 +685,14 @@ G.features.forEach(f=>{
 const MAP={groups:{}};
 function buildMap(){
   const svg=$('#map');svg.setAttribute('viewBox','0 0 1000 383');
-  const defs=sv('defs',{},[sv('pattern',{id:'hatch',width:6,height:6,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'},[sv('line',{x1:0,y1:0,x2:0,y2:6,stroke:'var(--ink)','stroke-width':1.1,'stroke-opacity':.55})])]);
-  svg.append(defs);
+  svg.append(sv('defs',{},[sv('pattern',{id:'hatch',width:6,height:6,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'},[sv('line',{x1:0,y1:0,x2:0,y2:6,stroke:'var(--ink)','stroke-width':1.1,'stroke-opacity':.45})])]));
   NAMES.forEach(n=>{
     const g=GEOM[n];if(!g)return;
     const grp=sv('g',{class:'pg',tabindex:0,role:'button','data-n':n});
     const fill=sv('path',{class:'fill',d:g.d,'fill-rule':'evenodd'});
     const hatch=sv('path',{class:'hatch',d:g.d,'fill-rule':'evenodd',fill:'url(#hatch)',opacity:0});
-    grp.append(fill,hatch);
-    const lab=sv('text',{class:'qlab',x:g.c[0].toFixed(1),y:g.c[1].toFixed(1),opacity:0});grp.append(lab);
+    const lab=sv('text',{class:'qlab',x:g.c[0].toFixed(1),y:g.c[1].toFixed(1),opacity:0});
+    grp.append(fill,hatch,lab);
     grp.addEventListener('pointerenter',e=>{setHov(n,true);mapTip(e,n)});
     grp.addEventListener('pointermove',e=>mapTip(e,n));
     grp.addEventListener('pointerleave',()=>{setHov(n,false);hideTip()});
@@ -428,9 +702,10 @@ function buildMap(){
     grp.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(n)}});
     svg.append(grp);MAP.groups[n]={grp,fill,hatch,lab};
   });
-  MAP.ovSel=sv('path',{fill:'none',stroke:'var(--ink)','stroke-width':1.8,'pointer-events':'none','vector-effect':'non-scaling-stroke','fill-rule':'evenodd'});
-  MAP.ovHov=sv('path',{fill:'none',stroke:'var(--ink)','stroke-width':1.4,'pointer-events':'none','vector-effect':'non-scaling-stroke','fill-rule':'evenodd',opacity:.8});
-  svg.append(MAP.ovHov,MAP.ovSel);
+  MAP.ovHov=sv('path',{fill:'none',stroke:'var(--ink)','stroke-width':1.3,'pointer-events':'none','vector-effect':'non-scaling-stroke','fill-rule':'evenodd',opacity:.7});
+  MAP.ovHalo=sv('path',{fill:'none',stroke:'var(--surface)','stroke-width':5,'stroke-linejoin':'round','pointer-events':'none','vector-effect':'non-scaling-stroke','fill-rule':'evenodd'});
+  MAP.ovSel=sv('path',{fill:'none',stroke:'var(--ink)','stroke-width':2,'stroke-linejoin':'round','pointer-events':'none','vector-effect':'non-scaling-stroke','fill-rule':'evenodd'});
+  svg.append(MAP.ovHov,MAP.ovHalo,MAP.ovSel);
 }
 function setHov(n,on){MAP.ovHov.setAttribute('d',on&&GEOM[n]?GEOM[n].d:'')}
 function regionBox(r){
@@ -441,51 +716,42 @@ function regionBox(r){
   const ar=1000/383;let w=x1-x0,hh=y1-y0;if(w/hh<ar){const nw=hh*ar;x0-=(nw-w)/2;w=nw}else{const nh=w/ar;y0-=(nh-hh)/2;hh=nh}
   return[x0,y0,w,hh];
 }
-function setRegion(r){state.region=r;const b=regionBox(r);$('#map').setAttribute('viewBox',b.join(' '));document.querySelectorAll('#regionChips .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.r===r?'true':'false'));updateMap()}
-function sequentialColor(i){return`var(--seq${i})`}
+function setRegion(r){state.region=r;$('#map').setAttribute('viewBox',regionBox(r).join(' '));$$('#regionChips .chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.r===r)));updateMap()}
 function quadForMap(n){const p=byName[n];return p&&p.kuadran?qOfProv(p):null}
 function mapK(){const svg=$('#map'),w=svg.getBoundingClientRect().width||1000;return svg.viewBox.baseVal.width/w}
 function updateMap(){
-  const m=state.mode==='metrik'?state.metrik:null,y=state.tahun;
-  const k=mapK();
+  const m=state.mode==='metrik'?state.metrik:null,y=state.tahun,k=mapK();
   const pat=$('#hatch');pat.setAttribute('width',6*k);pat.setAttribute('height',6*k);pat.firstChild.setAttribute('y2',6*k);pat.firstChild.setAttribute('stroke-width',1.1*k);
   for(const n of NAMES){
     const o=MAP.groups[n];if(!o)continue;
     let fill='var(--na)',hatch=0,lab='',labCol='';
-    if(m){
-      const v=getVal(n,m,y);
-      if(v!=null){fill=sequentialColor(binIdx(m,v));if(oldB(n,m,y))hatch=1}
-    }else{
-      const q=quadForMap(n);
-      if(q){fill=`var(--${q.toLowerCase()})`;lab=q;labCol=`var(--${q.toLowerCase()}t)`;if(!byName[n].stab_kuat)hatch=1}
-    }
+    if(m){const v=getVal(n,m,y);if(v!=null){fill=`var(--seq${binIdx(m,v)})`;if(oldB(n,m,y))hatch=1}}
+    else{const q=quadForMap(n);if(q){fill=`var(--${q.toLowerCase()})`;lab=q;labCol=`var(--${q.toLowerCase()}t)`;if(!byName[n].stab_kuat)hatch=1}}
     o.fill.style.fill=fill;o.hatch.setAttribute('opacity',hatch);
     const showLab=!m&&lab&&GEOM[n].w/k>24&&GEOM[n].h/k>13;
-    o.lab.textContent=showLab?lab:'';o.lab.setAttribute('opacity',showLab?1:0);o.lab.style.fill=labCol;
-    o.lab.style.fontSize=(11*k).toFixed(2)+'px';
+    o.lab.textContent=showLab?lab:'';o.lab.setAttribute('opacity',showLab?1:0);o.lab.style.fill=labCol;o.lab.style.fontSize=(11*k).toFixed(2)+'px';
     const v2=m?getVal(n,m,y):null;
-    o.grp.setAttribute('aria-label',m?`${n}: ${v2==null?'tidak tersedia':fmt(v2,METRIK[m].dec)+' '+METRIK[m].unit}`:`${n}: ${quadForMap(n)||'tanpa kuadran'}`);
+    o.grp.setAttribute('aria-label',m?`${n}: ${v2==null?'tidak tersedia':fmt(v2,METRIK[m].dec)+unitOf(METRIK[m])}`:`${n}: ${quadForMap(n)||'tanpa kuadran'}`);
   }
-  MAP.ovSel.setAttribute('d',GEOM[state.sel]?GEOM[state.sel].d:'');
-  updateLegend();updateRank();
+  const sd=GEOM[state.sel]?GEOM[state.sel].d:'';MAP.ovHalo.setAttribute('d',sd);MAP.ovSel.setAttribute('d',sd);
+  updateLegend();updateRank();renderMapInsp();
   const M=m&&METRIK[m];
-  $('#mapSub').textContent=m?`${M.label} · ${y}${M.nat&&M.nat(y)!=null?` · Indonesia: ${fmt(M.nat(y),M.dec)}${M.unit==='%'?'%':''}`:''}`:`Tipologi kuadran periode ${D.meta.periode_utama} · sumbu Y: ${YM[state.ymode].short}`;
+  $('#mapSub').textContent=m?`${M.label}, ${y}.${M.nat&&M.nat(y)!=null?` Indonesia ${fmt(M.nat(y),M.dec)}${unitOf(M)}.`:''}`:`Tipologi periode ${D.meta.periode_utama}, sumbu Y ${YM[state.ymode].short.toLowerCase()}.`;
 }
 function mapTip(ev,n){
   const m=state.mode==='metrik'?state.metrik:null,y=state.tahun,p=byName[n];const nodes=[h('div',{class:'tt',text:n}),h('div',{class:'ts',text:p.wilayah})];
   if(m){
     const M=METRIK[m],v=getVal(n,m,y);
-    nodes.push(h('div',{class:'tv',text:v==null?'tidak tersedia':fmt(v,M.dec)+(M.unit==='%'?'%':' '+M.unit)}),h('div',{class:'ts',text:`${M.label} · ${y}`}));
-    const rk=rankOf(n,m,y);if(rk)nodes.push(rowTip('Peringkat tertinggi',`${rk.r} dari ${rk.n}`));
-    if(M.nat&&M.nat(y)!=null)nodes.push(rowTip('Indonesia',fmt(M.nat(y),M.dec)+(M.unit==='%'?'%':'')));
-    if(v==null){const base=m==='pertumbuhan_bekerja'&&y===YEARS[0];nodes.push(h('div',{class:'tw',text:base?'Pertumbuhan 2021 tidak dihitung: tidak ada data Agustus 2020 pada tabel yang dipakai.':PAPUA6.has(n)?'Data provinsi ini belum tersedia pada tahun tersebut (pemekaran Papua 2022) atau batas wilayah berubah sehingga pertumbuhan tidak sebanding.':'Data tidak tersedia pada tabel BPS untuk tahun ini.'}))}
+    nodes.push(h('div',{class:'tv',text:v==null?'tidak tersedia':fmt(v,M.dec)+unitOf(M)}),h('div',{class:'ts',text:`${M.label}, ${y}`}));
+    const rk=rankOf(n,m,y);if(rk)nodes.push(rowTip('Urutan tertinggi',`${rk.r} dari ${rk.n}`));
+    if(M.nat&&M.nat(y)!=null)nodes.push(rowTip('Indonesia',fmt(M.nat(y),M.dec)+unitOf(M)));
+    if(v==null){const base=m==='pertumbuhan_bekerja'&&y===YEARS[0];nodes.push(h('div',{class:'tw',text:base?'Pertumbuhan 2021 tidak dihitung karena tidak ada data Agustus 2020 pada tabel yang dipakai.':PAPUA6.has(n)?'Data provinsi ini belum tersedia pada tahun tersebut (pemekaran Papua 2022), atau batas wilayah berubah sehingga pertumbuhan tidak sebanding.':'Data tidak tersedia pada tabel BPS untuk tahun ini.'}))}
     if(v!=null&&oldB(n,m,y))nodes.push(h('div',{class:'tw',text:'† Nilai ini mencakup wilayah sebelum pemekaran Papua, sehingga tidak sebanding dengan poligon baru.'}));
   }else{
     const q=quadForMap(n);
-    if(q){nodes.push(h('div',{class:'tt',style:'display:flex;align-items:center;gap:6px;margin-top:4px'},[qIcon(q,12),`${q} · ${QD[q].nama}`]));
-      nodes.push(rowTip('PDRB rata-rata (X)',fmt(p.X)+'%'),rowTip(YM[state.ymode].short,fmt(p[state.ymode])),rowTip('Label',p.stab_kuat?'kuat':'lemah'));
-      if(!p.stab_kuat)nodes.push(h('div',{class:'tw',text:`Konsisten ${p.stab_konsisten_tahunan} dari 3 tahun; bila sumbu Y diganti: ${p.stab_kuadran_y_alternatif}. Gunakan hati-hati.`}))}
-    else nodes.push(h('div',{class:'tw',text:'Tanpa kuadran: batas wilayah berubah akibat pemekaran. Lihat Papua Raya pada diagram kuadran.'}));
+    if(q){nodes.push(h('div',{class:'tt',style:'display:flex;align-items:center;gap:6px;margin-top:6px'},[qIcon(q,11),`${q} · ${QD[q].nama}`]),rowTip('PDRB rata-rata',fmt(p.X)+'%'),rowTip(YM[state.ymode].short,fmt(p[state.ymode])),rowTip('Label',p.stab_kuat?'kuat':'lemah'));
+      if(!p.stab_kuat)nodes.push(h('div',{class:'tw',text:`Konsisten ${p.stab_konsisten_tahunan} dari 3 tahun; bila sumbu Y diganti menjadi ${p.stab_kuadran_y_alternatif}.`}))}
+    else nodes.push(h('div',{class:'tw',text:'Tanpa kuadran karena batas wilayah berubah akibat pemekaran. Lihat Papua Raya di tab Kuadran.'}));
   }
   showTip(ev,nodes);
 }
@@ -493,27 +759,26 @@ function rankOf(n,m,y){
   const arr=NAMES.map(k=>({k,v:getVal(k,m,y)})).filter(o=>o.v!=null&&!oldB(o.k,m,y)).sort((a,b)=>b.v-a.v);
   const i=arr.findIndex(o=>o.k===n);return i<0?null:{r:i+1,n:arr.length};
 }
+function hatchSw(base){return sv('svg',{width:16,height:12,'aria-hidden':'true'},[sv('rect',{width:16,height:12,rx:3,fill:base}),sv('rect',{width:16,height:12,rx:3,fill:'url(#hatch)'})])}
 function updateLegend(){
   const L=$('#mapLegend');L.replaceChildren();const note=$('#mapNote');
   if(state.mode==='metrik'){
     const m=state.metrik,M=METRIK[m],e=BINS[m],d=M.dec;
     const lab=i=>i===0?`≤ ${fmt(e[0],d)}`:i===5?`> ${fmt(e[4],d)}`:`${fmt(e[i-1],d)}–${fmt(e[i],d)}`;
     for(let i=0;i<6;i++)L.append(h('span',{class:'it'},[h('span',{class:'sw',style:`background:var(--seq${i})`}),lab(i)]));
-    L.append(h('span',{class:'it'},[h('span',{class:'sw',style:'background:var(--na)'}),'tidak tersedia']));
-    L.append(h('span',{class:'it'},[sv('svg',{width:18,height:12,'aria-hidden':'true'},[sv('rect',{width:18,height:12,fill:'var(--seq2)'}),sv('rect',{width:18,height:12,fill:'url(#hatch)'})]),'† batas sebelum pemekaran']));
-    note.textContent=`Kelas warna memakai enam kuantil dari seluruh nilai 2021–2025, sehingga warna antartahun sebanding. ${M.ket}`;
+    L.append(h('span',{class:'it'},[h('span',{class:'sw',style:'background:var(--na)'}),'tidak tersedia']),h('span',{class:'it'},[hatchSw('var(--seq2)'),'† batas sebelum pemekaran']));
+    note.textContent=`Kelas warna memakai enam kuantil dari seluruh nilai 2021–2025, jadi warna antartahun sebanding. ${M.ket}`;
   }else{
     for(const q of Object.keys(QD))L.append(h('span',{class:'it'},[h('span',{class:'sw',style:`background:var(--${q.toLowerCase()})`}),`${q} ${QD[q].nama}`]));
-    L.append(h('span',{class:'it'},[h('span',{class:'sw',style:'background:var(--na)'}),'Papua: tanpa kuadran']));
-    L.append(h('span',{class:'it'},[sv('svg',{width:18,height:12,'aria-hidden':'true'},[sv('rect',{width:18,height:12,fill:'var(--q1)'}),sv('rect',{width:18,height:12,fill:'url(#hatch)'})]),'label lemah']));
-    note.textContent=`Kuadran memakai ambang nasional: PDRB ${fmt(BX)}%/tahun dan ${YM[state.ymode].short.toLowerCase()} ${fmt(YM[state.ymode].thr())}. Tipologi bersifat tetap untuk periode ${D.meta.periode_utama}; filter tahun tidak berlaku pada tampilan ini.`;
+    L.append(h('span',{class:'it'},[h('span',{class:'sw',style:'background:var(--na)'}),'Papua, tanpa kuadran']),h('span',{class:'it'},[hatchSw('var(--q1)'),'label lemah']));
+    note.textContent=`Ambang nasional: PDRB ${fmt(BX)}%/tahun dan ${YM[state.ymode].short.toLowerCase()} ${fmt(YM[state.ymode].thr())}. Tipologi tetap untuk periode ${D.meta.periode_utama}, jadi slider tahun tidak berlaku di tampilan ini.`;
   }
 }
 function updateRank(){
   const box=$('#rankList');box.replaceChildren();
   if(state.mode==='metrik'){
     const m=state.metrik,M=METRIK[m],y=state.tahun;
-    $('#rankTitle').textContent=`Peringkat · ${M.label} · ${y}`;
+    $('#rankTitle').textContent=`Peringkat, ${y}`;
     const arr=NAMES.map(k=>({k,v:getVal(k,m,y),old:oldB(k,m,y)}));
     const ok=arr.filter(o=>o.v!=null).sort((a,b)=>b.v-a.v),na=arr.filter(o=>o.v==null);
     const vs=ok.map(o=>o.v).sort((a,b)=>a-b);
@@ -524,26 +789,44 @@ function updateRank(){
       box.append(h('button',{class:'rrow'+(o.old?' old':'')+(state.sel===o.k?' sel':''),type:'button','data-n':o.k,onclick:()=>select(o.k)},[h('span',{class:'rn',text:i+1}),h('span',{class:'rname',text:o.k+(o.old?' †':'')}),bar,h('span',{class:'rval',text:fmt(o.v,M.dec)})]));
     });
     if(na.length){box.append(h('div',{class:'sectionlab',text:'Tidak tersedia'}));na.forEach(o=>box.append(h('button',{class:'rrow na'+(state.sel===o.k?' sel':''),type:'button','data-n':o.k,onclick:()=>select(o.k)},[h('span',{class:'rn',text:'–'}),h('span',{class:'rname',text:o.k}),h('span',{class:'rbar'}),h('span',{class:'rval',text:'–'})])))}
-    if(vs[vs.length-1]>top||vs[0]<lo)box.append(h('div',{class:'note',style:'padding:4px 6px',text:'Batang bergaris putus melampaui rentang gambar; nilainya ditulis di kanan.'}));
+    if(vs[vs.length-1]>top||vs[0]<lo)box.append(h('p',{class:'note',style:'padding:8px 8px 0',text:'Batang bergaris putus melampaui rentang gambar; nilainya tertulis di kanan.'}));
   }else{
-    $('#rankTitle').textContent=`Daftar kuadran · sumbu Y: ${YM[state.ymode].short}`;
+    $('#rankTitle').textContent=`Anggota kuadran, sumbu Y ${YM[state.ymode].short.toLowerCase()}`;
     Object.keys(QD).forEach(q=>{
       const mem=PROV.filter(p=>qOfProv(p)===q).sort((a,b)=>b.X-a.X);
       box.append(h('div',{class:'sectionlab',text:`${q} · ${QD[q].nama} (${mem.length})`}));
-      mem.forEach(p=>box.append(h('button',{class:'rrow'+(state.sel===p.provinsi?' sel':''),style:'grid-template-columns:24px minmax(0,1fr) auto',type:'button',onclick:()=>select(p.provinsi)},[h('span',{class:'qb'},[qIcon(q,12)]),h('span',{class:'rname',text:p.provinsi+(p.stab_kuat?'':' *')}),h('span',{class:'rval',text:`X ${fmt(p.X)} · Y ${fmt(p[state.ymode])}`})])));
+      mem.forEach(p=>box.append(h('button',{class:'rrow'+(state.sel===p.provinsi?' sel':''),style:'grid-template-columns:22px minmax(0,1fr) auto',type:'button',onclick:()=>select(p.provinsi)},[h('span',{class:'qb'},[qIcon(q,11)]),h('span',{class:'rname',text:p.provinsi+(p.stab_kuat?'':' (lemah)')}),h('span',{class:'rval',text:`${fmt(p.X)} · ${fmt(p[state.ymode])}`})])));
     });
-    box.append(h('div',{class:'note',style:'padding:4px 6px',text:'* label lemah. Papua tidak memiliki kuadran.'}));
+    box.append(h('p',{class:'note',style:'padding:8px 8px 0',text:'Angka: PDRB rata-rata · sumbu Y. Papua tidak memiliki kuadran.'}));
   }
 }
+function renderMapInsp(){
+  const box=$('#mapInsp'),n=state.sel,isRaya=n==='Papua Raya',p=byName[n];box.replaceChildren();
+  const q=selQuad(n);
+  box.append(h('div',{},[h('h2',{class:'t-h3',text:n}),h('p',{class:'t-cap',style:'margin-top:4px',text:isRaya?'Gabungan enam provinsi Papua':p.wilayah})]));
+  if(q)box.append(h('div',{class:'row'},[qBadge(q),!isRaya&&p.kuadran?h('span',{class:'badge',text:p.stab_kuat?'Label kuat':'Label lemah'}):null]));
+  if(state.mode==='metrik'){
+    const M=METRIK[state.metrik],v=getVal(n,state.metrik,state.tahun);
+    box.append(h('div',{},[h('div',{class:'big tnum'},[fmt(v,M.dec),h('small',{text:v==null?'':unitOf(M).trim()})]),h('p',{class:'t-cap',style:'margin-top:4px',text:`${M.label}, ${state.tahun}`})]));
+    const dl=h('dl',{class:'kv'});const rk=isRaya?null:rankOf(n,state.metrik,state.tahun);
+    if(rk)dl.append(h('dt',{text:'Urutan tertinggi'}),h('dd',{text:`${rk.r} dari ${rk.n}`}));
+    if(M.nat&&M.nat(state.tahun)!=null)dl.append(h('dt',{text:'Indonesia'}),h('dd',{text:fmt(M.nat(state.tahun),M.dec)+unitOf(M)}));
+    if(dl.children.length)box.append(dl);
+    if(isRaya)box.append(h('p',{class:'note',text:'Papua Raya tidak digambar di peta karena merupakan gabungan; nilainya dihitung dari level enam provinsi.'}));
+  }else if(q){
+    const src=isRaya?RAYA:p;
+    box.append(h('dl',{class:'kv'},[h('dt',{text:'PDRB rata-rata'}),h('dd',{text:fmt(src.X)+'%'}),h('dt',{text:YM[state.ymode].short}),h('dd',{text:fmt(src[state.ymode])})]));
+  }else box.append(h('p',{class:'note',text:'Provinsi ini tidak memiliki kuadran karena batas wilayahnya berubah. Lihat Papua Raya.'}));
+  box.append(chevLink('Buka profil',()=>go('profil')));
+}
 
-/* ---------- diagram sebar ---------- */
-const SC_ST={pts:[],px:null};
+/* ---------- diagram kuadran ---------- */
 function niceStep(range){return range>6?1:range>3?.5:.25}
 function renderScatter(){
   const svg=$('#scatter'),box=$('#scatterBox');svg.replaceChildren();
-  const W=Math.max(300,box.clientWidth||600),H=W<560?400:Math.round(Math.min(560,W*.58));
+  const W=Math.max(300,box.clientWidth||600),H=W<560?420:Math.round(Math.min(600,W*.56));
   svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('height',H);
-  const M={l:46,r:14,t:12,b:50},PW=W-M.l-M.r,PH=H-M.t-M.b,ym=state.ymode,thrY=YM[ym].thr();
+  const M={l:44,r:12,t:12,b:52},PW=W-M.l-M.r,PH=H-M.t-M.b,ym=state.ymode,thrY=YM[ym].thr();
   const pts=PROV.filter(p=>p.kuadran).map(p=>({n:p.provinsi,x:p.X,y:p[ym],tpt:p.tpt_akhir,q:quadOf(p.X,p[ym]),strong:p.stab_kuat,raya:false}));
   pts.push({n:'Papua Raya',x:RAYA.X,y:RAYA[ym],tpt:RAYA.tpt_akhir,q:rayaQ(),strong:true,raya:true});
   const xs=pts.map(p=>p.x),ys=pts.map(p=>p.y),xmin=Math.floor(Math.min(...xs)-.4),xmax=Math.ceil(Math.max(...xs)+1),XB=8,FR=.86;
@@ -551,120 +834,140 @@ function renderScatter(){
   const st=niceStep(Math.max(...ys)-Math.min(...ys)),ymin=Math.floor((Math.min(...ys)-.2)/st)*st,ymax=Math.ceil((Math.max(...ys)+.2)/st)*st;
   const sy=v=>M.t+(1-(v-ymin)/(ymax-ymin))*PH;
   const g=sv('g');svg.append(g);
-  for(let v=ymin;v<=ymax+1e-9;v+=st){g.append(sv('line',{x1:M.l,x2:W-M.r,y1:sy(v),y2:sy(v),stroke:'var(--grid)','stroke-width':1}),sv('text',{x:M.l-6,y:sy(v)+4,'text-anchor':'end','font-size':11,fill:'var(--muted)',text:fmt(v,st<.5?2:st<1?1:0)}))}
-  const xt=[];for(let v=Math.ceil(xmin);v<=XB;v+=(XB-xmin>9?2:1))xt.push(v);for(let v=Math.ceil((XB+4)/5)*5;v<=xmax;v+=5)xt.push(v);
-  xt.forEach(v=>{g.append(sv('line',{x1:sx(v),x2:sx(v),y1:M.t,y2:H-M.b,stroke:'var(--grid)','stroke-width':1}),sv('text',{x:sx(v),y:H-M.b+16,'text-anchor':'middle','font-size':11,fill:'var(--muted)',text:fmt(v,0)}))});
-  g.append(sv('line',{x1:M.l,x2:W-M.r,y1:H-M.b,y2:H-M.b,stroke:'var(--axis)'}),sv('line',{x1:M.l,x2:M.l,y1:M.t,y2:H-M.b,stroke:'var(--axis)'}));
-  const bx=sx(XB);[-3,3].forEach(o=>g.append(sv('line',{x1:bx+o-3,x2:bx+o+3,y1:H-M.b+5,y2:H-M.b-5,stroke:'var(--ink2)','stroke-width':1.4})));
-  g.append(sv('text',{x:M.l+PW/2,y:H-8,'text-anchor':'middle','font-size':12,fill:'var(--ink2)',text:'Laju pertumbuhan PDRB, rata-rata geometrik 2023–2025 (%/tahun); skala dipadatkan di atas 8%'}));
-  g.append(sv('text',{transform:`translate(13 ${M.t+PH/2}) rotate(-90)`,'text-anchor':'middle','font-size':12,fill:'var(--ink2)',text:YM[ym].label}));
   const tx=sx(BX),ty=sy(thrY);
-  g.append(sv('line',{x1:tx,x2:tx,y1:M.t,y2:H-M.b,stroke:'var(--ink2)','stroke-width':1.2}),sv('line',{x1:M.l,x2:W-M.r,y1:ty,y2:ty,stroke:'var(--ink2)','stroke-width':1.2}));
-  g.append(sv('text',{x:tx+4,y:M.t+10,'font-size':11,fill:'var(--ink2)',text:`ambang nasional ${fmt(BX)}%`}),sv('text',{x:W-M.r-4,y:ty-5,'text-anchor':'end','font-size':11,fill:'var(--ink2)',text:`ambang nasional ${fmt(thrY)}`}));
-  const corner=(q,x,y,a)=>g.append(sv('text',{x,y,'text-anchor':a,'font-size':12,'font-weight':700,fill:'var(--ink2)',opacity:.85,text:`${q} · ${QD[q].nama}`}));
-  corner('Q3',M.l+6,M.t+24,'start');corner('Q1',W-M.r-6,M.t+24,'end');corner('Q4',M.l+6,H-M.b-8,'start');corner('Q2',W-M.r-6,H-M.b-8,'end');
+  /* bidang kuadran sangat tipis supaya geometri terbaca tanpa warna menutupi titik */
+  [[M.l,M.t,tx-M.l,ty-M.t,'Q3'],[tx,M.t,W-M.r-tx,ty-M.t,'Q1'],[M.l,ty,tx-M.l,H-M.b-ty,'Q4'],[tx,ty,W-M.r-tx,H-M.b-ty,'Q2']].forEach(([x,y,w,hh,q])=>g.append(sv('rect',{x,y,width:Math.max(0,w),height:Math.max(0,hh),fill:`var(--${q.toLowerCase()})`,'fill-opacity':.05})));
+  for(let v=ymin;v<=ymax+1e-9;v+=st){g.append(sv('line',{x1:M.l,x2:W-M.r,y1:sy(v),y2:sy(v),stroke:'var(--grid)','stroke-width':1}),sv('text',{x:M.l-8,y:sy(v)+4,'text-anchor':'end','font-size':12,fill:'var(--muted)',text:fmt(v,st<.5?2:st<1?1:0)}))}
+  const xt=[];for(let v=Math.ceil(xmin);v<=XB;v+=(XB-xmin>9?2:1))xt.push(v);for(let v=Math.ceil((XB+4)/5)*5;v<=xmax;v+=5)xt.push(v);
+  xt.forEach(v=>{g.append(sv('line',{x1:sx(v),x2:sx(v),y1:M.t,y2:H-M.b,stroke:'var(--grid)','stroke-width':1}),sv('text',{x:sx(v),y:H-M.b+18,'text-anchor':'middle','font-size':12,fill:'var(--muted)',text:fmt(v,0)}))});
+  const bx=sx(XB);[-3,3].forEach(o=>g.append(sv('line',{x1:bx+o-3,x2:bx+o+3,y1:H-M.b+5,y2:H-M.b-5,stroke:'var(--ink2)','stroke-width':1.4})));
+  g.append(sv('text',{x:M.l+PW/2,y:H-10,'text-anchor':'middle','font-size':12.5,fill:'var(--ink2)',text:W<560?'Laju PDRB 2023–2025 (%/tahun)':'Laju PDRB, rata-rata geometrik 2023–2025 (%/tahun); skala dipadatkan di atas 8%'}));
+  g.append(sv('text',{transform:`translate(13 ${M.t+PH/2}) rotate(-90)`,'text-anchor':'middle','font-size':12.5,fill:'var(--ink2)',text:YM[ym].label}));
+  g.append(sv('line',{x1:tx,x2:tx,y1:M.t,y2:H-M.b,stroke:'var(--ink2)','stroke-width':1}),sv('line',{x1:M.l,x2:W-M.r,y1:ty,y2:ty,stroke:'var(--ink2)','stroke-width':1}));
+  g.append(sv('text',{x:tx+6,y:M.t+12,'font-size':11.5,fill:'var(--ink2)',text:`Indonesia ${fmt(BX)}%`}),sv('text',{x:W-M.r-6,y:ty-6,'text-anchor':'end','font-size':11.5,fill:'var(--ink2)',text:`Indonesia ${fmt(thrY)}`}));
+  const corner=(q,x,y,a)=>g.append(sv('text',{x,y,'text-anchor':a,'font-size':W<560?11.5:13,'font-weight':600,fill:'var(--ink2)',text:W<560?q:`${q} · ${QD[q].nama}`}));
+  corner('Q3',M.l+8,M.t+28,'start');corner('Q1',W-M.r-8,M.t+28,'end');corner('Q4',M.l+8,H-M.b-10,'start');corner('Q2',W-M.r-8,H-M.b-10,'end');
   const rad=t=>Math.max(4,Math.min(9.5,4+(t-1)*.85));
   const layer=sv('g');svg.append(layer);const SPTS=[];
   pts.sort((a,b)=>(a.raya-b.raya)).forEach(p=>{
     const cx=sx(p.x),cy=sy(p.y),r=rad(p.tpt);let el;
     const weak=!p.strong&&!p.raya;
-    if(p.raya){el=sv('g',{});const rr=r+2.5;el.append(sv('polygon',{points:[0,1,2,3,4,5,6,7,8,9].map(i=>{const a=-Math.PI/2+i*Math.PI/5,q=i%2?rr*.45:rr*1.35;return(cx+q*Math.cos(a)).toFixed(1)+','+(cy+q*Math.sin(a)).toFixed(1)}).join(' '),fill:'var(--ink)',stroke:'var(--surface)','stroke-width':2}))}
+    if(p.raya)el=sv('polygon',{points:starPts(cx,cy,r+4),fill:'var(--ink)',stroke:'var(--surface)','stroke-width':2});
     else el=shapeEl(p.q,cx,cy,r,weak?{fill:'var(--surface)',stroke:`var(--${p.q.toLowerCase()})`,'stroke-width':2.2}:{});
-    const grp=sv('g',{class:'spt',tabindex:0,role:'button','aria-label':`${p.n}: ${p.raya?'Papua Raya':p.q}, PDRB ${fmt(p.x)}%, ${YM[ym].short} ${fmt(p.y)}`},[el]);
+    const grp=sv('g',{class:'spt',tabindex:0,role:'button','aria-label':`${p.n}: ${p.q}, PDRB ${fmt(p.x)}%, ${YM[ym].short} ${fmt(p.y)}`},[el]);
     grp.addEventListener('focus',()=>{const b=grp.getBoundingClientRect();scTip({clientX:b.left+b.width/2,clientY:b.top+b.height/2},p)});grp.addEventListener('blur',hideTip);
-    grp.addEventListener('click',()=>{if(!p.raya)select(p.n);else select('Papua Raya')});grp.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();grp.dispatchEvent(new Event('click'))}});
+    grp.addEventListener('click',()=>select(p.n));grp.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(p.n)}});
     layer.append(grp);SPTS.push({p,cx,cy,r,grp});
   });
-  const ring=sv('circle',{r:0,fill:'none',stroke:'var(--ink)','stroke-width':1.6,'pointer-events':'none'});svg.append(ring);
-  const placed=[];
-  const cand=SPTS.slice().sort((a,b)=>{const sc=o=>o.p.raya?-1e9:state.sel===o.p.n?-1e8:-(Math.abs(o.p.x-median(xs))/ (Math.max(...xs)-Math.min(...xs))+Math.abs(o.p.y-median(ys))/(Math.max(...ys)-Math.min(...ys)));return sc(a)-sc(b)});
-  let nl=0;
+  const ring=sv('circle',{r:0,fill:'none',stroke:'var(--ink)','stroke-width':1.5,'pointer-events':'none'});svg.append(ring);
+  const placed=[],lab=sv('g',{'pointer-events':'none'});svg.insertBefore(lab,ring);
+  const rx=Math.max(...xs)-Math.min(...xs),ry=Math.max(...ys)-Math.min(...ys),mx0=median(xs),my0=median(ys);
+  const cand=SPTS.slice().sort((a,b)=>{const sc=o=>o.p.raya?-1e9:state.sel===o.p.n?-1e8:-(Math.abs(o.p.x-mx0)/rx+Math.abs(o.p.y-my0)/ry);return sc(a)-sc(b)});
+  let nl=0;const maxL=W<560?4:7;
   for(const o of cand){
-    const important=o.p.raya||state.sel===o.p.n;if(!important&&nl>=7)continue;
-    const w=o.p.n.length*6.1+4,hh=13;
-    for(const[dx,dy,anc]of[[o.r+5,4,'start'],[-o.r-5,4,'end'],[0,-o.r-6,'middle'],[0,o.r+14,'middle']]){
-      const x=o.cx+dx,y=o.cy+dy,x0=anc==='start'?x:anc==='end'?x-w:x-w/2,box2=[x0,y-hh+2,x0+w,y+3];
-      if(box2[0]<M.l||box2[2]>W-M.r||box2[1]<M.t||box2[3]>H-M.b)continue;
-      const hit=placed.some(b=>!(box2[2]<b[0]||box2[0]>b[2]||box2[3]<b[1]||box2[1]>b[3]))||SPTS.some(s=>s!==o&&s.cx>box2[0]-s.r&&s.cx<box2[2]+s.r&&s.cy>box2[1]-s.r&&s.cy<box2[3]+s.r);
-      if(hit&&!important)continue;
-      placed.push(box2);g.append(sv('text',{x,y,'text-anchor':anc,'font-size':11.5,'font-weight':important?700:500,fill:'var(--ink)','paint-order':'stroke',stroke:'var(--surface)','stroke-width':3,text:o.p.n}));nl++;break;
-    }
+    const important=o.p.raya||state.sel===o.p.n;if(!important&&nl>=maxL)continue;
+    const w=o.p.n.length*6.4+4,hh=14;
+    let pick=null,fallback=null;
+    const rr=o.r+(state.sel===o.p.n?6:0),d=rr*.7+4,near=[[rr+6,4,'start'],[-rr-6,4,'end'],[0,-rr-7,'middle'],[0,rr+15,'middle'],[d,-d,'start'],[-d,-d,'end'],[d,d+10,'start'],[-d,d+10,'end']];
+    const far=[[30,-24,'start'],[-30,-24,'end'],[30,32,'start'],[-30,32,'end'],[0,-34,'middle'],[0,44,'middle']];
+    const tryAt=list=>{for(const[dx,dy,anc]of list){
+      const x=o.cx+dx,y=o.cy+dy,x0=anc==='start'?x:anc==='end'?x-w:x-w/2,b2=[x0,y-hh+2,x0+w,y+3];
+      if(b2[0]<M.l||b2[2]>W-M.r||b2[1]<M.t||b2[3]>H-M.b)continue;
+      const hit=placed.some(b=>!(b2[2]<b[0]||b2[0]>b[2]||b2[3]<b[1]||b2[1]>b[3]))||SPTS.some(s=>s!==o&&s.cx>b2[0]-s.r&&s.cx<b2[2]+s.r&&s.cy>b2[1]-s.r&&s.cy<b2[3]+s.r);
+      if(!hit)return[x,y,anc,b2];
+      if(!fallback)fallback=[x,y,anc,b2];
+    }return null};
+    pick=tryAt(near);let lead=false;
+    /* semua posisi dekat bertabrakan: label penting digeser menjauh dengan garis penunjuk */
+    if(!pick&&important){fallback=null;pick=tryAt(far)||fallback;lead=!!pick}
+    if(pick){const[x,y,anc,b2]=pick;placed.push(b2);
+      if(lead){const lx=anc==='start'?b2[0]-2:anc==='end'?b2[2]+2:(b2[0]+b2[2])/2,ly=y<o.cy?b2[3]:b2[1],a=Math.atan2(ly-o.cy,lx-o.cx);
+        lab.append(sv('line',{x1:o.cx+Math.cos(a)*(o.r+2),y1:o.cy+Math.sin(a)*(o.r+2),x2:lx,y2:ly,stroke:'var(--ink2)','stroke-width':1}))}
+      lab.append(sv('text',{x,y,'text-anchor':anc,'font-size':12,'font-weight':important?600:500,fill:'var(--ink)','paint-order':'stroke',stroke:'var(--surface)','stroke-width':3.5,'stroke-linejoin':'round',text:o.p.n}));nl++}
   }
   const hit=sv('rect',{x:M.l,y:M.t,width:PW,height:PH,fill:'transparent'});svg.append(hit);
-  const nearest=ev=>{const r=svg.getBoundingClientRect(),k=W/r.width,mx=(ev.clientX-r.left)*k,my=(ev.clientY-r.top)*k;let best=null,bd=1e9;for(const o of SPTS){const d=Math.hypot(o.cx-mx,o.cy-my);if(d<bd){bd=d;best=o}}return bd<=32?best:null};
+  const nearest=ev=>{const r=svg.getBoundingClientRect(),kk=W/r.width,mx=(ev.clientX-r.left)*kk,my=(ev.clientY-r.top)*kk;let best=null,bd=1e9;for(const o of SPTS){const d=Math.hypot(o.cx-mx,o.cy-my);if(d<bd){bd=d;best=o}}return bd<=32?best:null};
   hit.addEventListener('pointermove',ev=>{const o=nearest(ev);if(o){ring.setAttribute('cx',o.cx);ring.setAttribute('cy',o.cy);ring.setAttribute('r',o.r+5);scTip(ev,o.p);hit.style.cursor='pointer'}else{ring.setAttribute('r',0);hideTip();hit.style.cursor='default'}});
   hit.addEventListener('pointerleave',()=>{ring.setAttribute('r',0);hideTip()});
-  hit.addEventListener('click',ev=>{const o=nearest(ev);if(o)select(o.p.raya?'Papua Raya':o.p.n)});
-  if(state.sel&&(SPTS.find(o=>o.p.n===state.sel))){const o=SPTS.find(o=>o.p.n===state.sel);svg.append(sv('circle',{cx:o.cx,cy:o.cy,r:o.r+5,fill:'none',stroke:'var(--ink)','stroke-width':1.8,'pointer-events':'none'}))}
-  $('#scSub').textContent=`Periode ${D.meta.periode_utama} · 32 provinsi non-Papua + Papua Raya`;
-  $('#scNote').textContent=`Garis ambang memakai angka nasional BPS. Luas penanda menunjukkan TPT Agustus ${LAST}. Penanda berongga adalah provinsi berlabel lemah: konsisten kurang dari 2 dari 3 kuadran tahunan, atau berpindah kuadran bila sumbu Y diganti. Papua Raya (bintang) memakai basis pekerja 2023 dan kuadrannya sangat dipengaruhi penurunan PDRB 2025.`;
+  hit.addEventListener('click',ev=>{const o=nearest(ev);if(o)select(o.p.n)});
+  const so=SPTS.find(o=>o.p.n===state.sel);if(so)svg.append(sv('circle',{cx:so.cx,cy:so.cy,r:so.r+6,fill:'none',stroke:'var(--ink)','stroke-width':1.8,'pointer-events':'none'}));
+  $('#scSub').textContent=`Periode ${D.meta.periode_utama}. 32 provinsi non-Papua dan Papua Raya.`;
+  $('#scNote').textContent=`Garis tengah adalah angka nasional BPS. Luas penanda menunjukkan TPT Agustus ${LAST}. Penanda berongga berarti label lemah: konsisten kurang dari 2 dari 3 kuadran tahunan, atau berpindah kuadran bila sumbu Y diganti. Papua Raya (bintang) memakai basis pekerja 2023 dan posisinya sangat dipengaruhi penurunan PDRB 2025.`;
 }
 function scTip(ev,p){
-  const nodes=[h('div',{class:'tt',text:p.n})];
-  nodes.push(h('div',{class:'tt',style:'display:flex;align-items:center;gap:6px;margin-top:2px'},[qIcon(p.q,12),`${p.q} · ${QD[p.q].nama}`]));
-  nodes.push(rowTip('PDRB rata-rata (X)',fmt(p.x)+'%'),rowTip(YM[state.ymode].short,fmt(p.y)),rowTip(`TPT ${LAST}`,fmt(p.tpt)+'%'));
+  const nodes=[h('div',{class:'tt',text:p.n}),h('div',{class:'tt',style:'display:flex;align-items:center;gap:6px;margin-top:4px;font-weight:500'},[qIcon(p.q,11),`${p.q} · ${QD[p.q].nama}`]),rowTip('PDRB rata-rata',fmt(p.x)+'%'),rowTip(YM[state.ymode].short,fmt(p.y)),rowTip(`TPT ${LAST}`,fmt(p.tpt)+'%')];
   if(p.raya)nodes.push(h('div',{class:'tw',text:'Gabungan enam provinsi Papua dari level. Basis pekerja 2023.'}));
-  else{const r=byName[p.n];nodes.push(rowTip('Label',r.stab_kuat?'kuat':'lemah'));if(!r.stab_kuat)nodes.push(h('div',{class:'tw',text:`Konsisten ${r.stab_konsisten_tahunan} dari 3 tahun; sumbu Y alternatif: ${r.stab_kuadran_y_alternatif}.`}))}
+  else{const r=byName[p.n];nodes.push(rowTip('Label',r.stab_kuat?'kuat':'lemah'));if(!r.stab_kuat)nodes.push(h('div',{class:'tw',text:`Konsisten ${r.stab_konsisten_tahunan} dari 3 tahun; sumbu Y alternatif menjadi ${r.stab_kuadran_y_alternatif}.`}))}
   showTip(ev,nodes);
 }
 function renderScLegend(){
   const L=$('#scLegend');L.replaceChildren();
-  Object.keys(QD).forEach(q=>L.append(h('span',{class:'it'},[qIcon(q,12),`${q} ${QD[q].nama}`])));
-  L.append(h('span',{class:'it'},[sv('svg',{width:12,height:12,'aria-hidden':'true'},[sv('circle',{cx:6,cy:6,r:4.6,fill:'var(--surface)',stroke:'var(--ink2)','stroke-width':1.8})]),'berongga = label lemah']));
-  L.append(h('span',{class:'it'},[sv('svg',{width:14,height:14,'aria-hidden':'true'},[sv('polygon',{points:[0,1,2,3,4,5,6,7,8,9].map(i=>{const a=-Math.PI/2+i*Math.PI/5,q=i%2?3:7.5;return(7+q*Math.cos(a)).toFixed(1)+','+(7+q*Math.sin(a)).toFixed(1)}).join(' '),fill:'var(--ink)'})]),'Papua Raya']));
+  Object.keys(QD).forEach(q=>L.append(h('span',{class:'it'},[qIcon(q,11),`${q} ${QD[q].nama}`])));
+  L.append(h('span',{class:'it'},[sv('svg',{width:12,height:12,'aria-hidden':'true'},[sv('circle',{cx:6,cy:6,r:4.5,fill:'none',stroke:'var(--ink2)','stroke-width':1.8})]),'berongga = label lemah']));
+  L.append(h('span',{class:'it'},[sv('svg',{width:14,height:14,'aria-hidden':'true'},[sv('polygon',{points:starPts(7,7,6.6),fill:'var(--ink)'})]),'Papua Raya']));
+}
+function renderScInsp(){
+  const box=$('#scInsp'),n=state.sel,isRaya=n==='Papua Raya',p=byName[n];box.replaceChildren();
+  const q=selQuad(n),src=isRaya?RAYA:p;
+  box.append(h('div',{},[h('div',{class:'name',text:n}),h('div',{class:'t-cap',text:isRaya?'Gabungan enam provinsi Papua':p.wilayah})]));
+  if(q){
+    box.append(qBadge(q));
+    box.append(h('div',{class:'m'},['PDRB rata-rata',h('b',{text:fmt(src.X)+'%'})]),h('div',{class:'m'},[YM[state.ymode].short,h('b',{text:fmt(src[state.ymode])})]),h('div',{class:'m'},[`TPT ${LAST}`,h('b',{text:fmt(src.tpt_akhir)+'%'})]));
+    if(!isRaya)box.append(h('div',{class:'m'},['Label',h('b',{text:p.stab_kuat?'kuat':'lemah'})]));
+  }else box.append(h('p',{class:'note',text:'Tanpa kuadran karena batas wilayah berubah. Pilih Papua Raya untuk melihat posisinya.'}));
+  box.append(chevLink('Buka profil',()=>go('profil')));
 }
 function renderQCards(){
   const box=$('#qCards');box.replaceChildren();
   Object.keys(QD).forEach(q=>{
     const mem=PROV.filter(p=>qOfProv(p)===q).sort((a,b)=>a.provinsi.localeCompare(b.provinsi,'id'));
-    const strong=mem.filter(p=>p.stab_kuat).length;
-    const raya=rayaQ()===q;
-    box.append(h('div',{class:'qcard'},[
-      h('h3',{},[qIcon(q,14),`${q} · ${QD[q].nama}`]),
-      h('p',{class:'qn',text:`${mem.length} provinsi, ${strong} berlabel kuat${raya?' · + Papua Raya':''}`}),
-      h('div',{class:'qm'},mem.map(p=>h('button',{type:'button',class:'mem'+(p.stab_kuat?'':' weak')+(state.sel===p.provinsi?' sel':''),onclick:()=>select(p.provinsi),text:p.provinsi+(p.stab_kuat?'':'*')})).concat(raya?[h('button',{type:'button',class:'mem',onclick:()=>select('Papua Raya'),text:'Papua Raya ★'})]:[]))
+    const strong=mem.filter(p=>p.stab_kuat).length,raya=rayaQ()===q;
+    const chips=mem.map(p=>h('button',{type:'button',class:'mem'+(p.stab_kuat?'':' weak')+(state.sel===p.provinsi?' sel':''),onclick:()=>select(p.provinsi),'aria-label':p.provinsi+(p.stab_kuat?'':', label lemah')},[p.provinsi]));
+    if(raya)chips.push(h('button',{type:'button',class:'mem'+(state.sel==='Papua Raya'?' sel':''),onclick:()=>select('Papua Raya')},[icon('star'),' Papua Raya']));
+    box.append(h('div',{class:'tile',style:`grid-area:${q.toLowerCase()}`},[
+      h('h3',{class:'t-h3'},[qIcon(q,15),q]),
+      h('p',{class:'t-ui ink2',text:`${QD[q].nama}. ${mem.length} provinsi, ${strong} berlabel kuat${raya?', ditambah Papua Raya':''}.`}),
+      h('div',{class:'qm'},chips)
     ]));
   });
-  box.append(h('p',{class:'note',style:'grid-column:1/-1',text:'* label lemah (huruf miring). Keanggotaan mengikuti sumbu Y yang dipilih pada filter; label kuat/lemah dihitung untuk sumbu Y utama (CAGR) dan sumbu Y alternatif.'}));
 }
 
 /* ---------- grafik garis ---------- */
 function lineChart(box,series,o){
   box.replaceChildren();
-  const W=Math.max(240,box.clientWidth||320),H=o.h||150,M={l:38,r:o.rm||40,t:10,b:22},PW=W-M.l-M.r,PH=H-M.t-M.b;
+  const W=Math.max(240,box.clientWidth||320),H=o.h||150,M={l:38,r:o.rm||42,t:12,b:24},PW=W-M.l-M.r,PH=H-M.t-M.b;
   const all=series.flatMap(s=>YEARS.map(y=>s.v[y]).filter(v=>v!=null));
   if(!all.length){box.append(h('p',{class:'note',text:'Data tidak tersedia untuk provinsi ini.'}));return}
   let lo=Math.min(...all),hi=Math.max(...all);if(hi-lo<1e-6){hi+=1;lo-=1}
-  const pad=(hi-lo)*.15;lo-=pad;hi+=pad;if(o.zero&&lo>0&&lo<(hi-lo)*.9)lo=0;
+  const pad=(hi-lo)*.15;lo-=pad;hi+=pad;
   const step=(()=>{const r=hi-lo,raw=r/3,mag=Math.pow(10,Math.floor(Math.log10(raw))),n=raw/mag;return(n<1.5?1:n<3.5?2:n<7.5?5:10)*mag})();
   const t0=Math.ceil(lo/step)*step,t1=Math.floor(hi/step)*step;
   const sx=y=>M.l+(YEARS.indexOf(y)/(YEARS.length-1))*PW,sy=v=>M.t+(1-(v-lo)/(hi-lo))*PH;
   const svg=sv('svg',{viewBox:`0 0 ${W} ${H}`,height:H,role:'img','aria-label':o.aria||o.title});
-  for(let v=t0;v<=t1+1e-9;v+=step)svg.append(sv('line',{x1:M.l,x2:W-M.r,y1:sy(v),y2:sy(v),stroke:'var(--grid)'}),sv('text',{x:M.l-5,y:sy(v)+4,'text-anchor':'end','font-size':11,fill:'var(--muted)',text:fmt(v,step<1?(step<.1?2:1):0)}));
-  YEARS.forEach(y=>svg.append(sv('text',{x:sx(y),y:H-6,'text-anchor':'middle','font-size':11,fill:y===state.tahun?'var(--ink)':'var(--muted)','font-weight':y===state.tahun?700:400,text:String(y)})));
-  svg.append(sv('line',{x1:M.l,x2:W-M.r,y1:H-M.b,y2:H-M.b,stroke:'var(--axis)'}));
+  for(let v=t0;v<=t1+1e-9;v+=step)svg.append(sv('line',{x1:M.l,x2:W-M.r,y1:sy(v),y2:sy(v),stroke:'var(--grid)'}),sv('text',{x:M.l-6,y:sy(v)+4,'text-anchor':'end','font-size':11.5,fill:'var(--muted)',text:fmt(v,step<1?(step<.1?2:1):0)}));
+  YEARS.forEach(y=>svg.append(sv('text',{x:sx(y),y:H-6,'text-anchor':'middle','font-size':11.5,fill:'var(--muted)',text:String(y)})));
   series.forEach(s=>{
     let d='';YEARS.forEach(y=>{const v=s.v[y];if(v==null){d+='|';return}d+=(d===''||d.endsWith('|')?'M':'L')+sx(y).toFixed(1)+' '+sy(v).toFixed(1)});
-    d.split('|').filter(Boolean).forEach(seg=>svg.append(sv('path',{d:seg,fill:'none',stroke:s.color,'stroke-width':2,'stroke-linecap':'round','stroke-linejoin':'round'})));
-    YEARS.forEach(y=>{const v=s.v[y];if(v==null)return;const hol=s.hollow&&s.hollow(y);svg.append(sv('circle',{cx:sx(y),cy:sy(v),r:4,fill:hol?'var(--surface)':s.color,stroke:hol?s.color:'var(--surface)','stroke-width':hol?2:2}))});
+    d.split('|').filter(Boolean).forEach(seg=>svg.append(sv('path',{d:seg,fill:'none',stroke:s.color,'stroke-width':2.2,'stroke-linecap':'round','stroke-linejoin':'round'})));
+    YEARS.forEach(y=>{const v=s.v[y];if(v==null)return;const hol=s.hollow&&s.hollow(y);svg.append(sv('circle',{cx:sx(y),cy:sy(v),r:hol?3.6:3.4,fill:hol?'var(--surface)':s.color,stroke:hol?s.color:'var(--surface)','stroke-width':2}))});
   });
   const ends=series.map(s=>{const ly=[...YEARS].reverse().find(y=>s.v[y]!=null);return ly==null?null:{s,y:ly,v:s.v[ly]}}).filter(Boolean).sort((a,b)=>sy(a.v)-sy(b.v));
-  let lastY=-99;ends.forEach(e=>{let y=sy(e.v)+4;if(y-lastY<12)y=lastY+12;lastY=y;svg.append(sv('text',{x:sx(e.y)+8,y,'font-size':11.5,'font-weight':650,fill:'var(--ink)',text:fmt(e.v,o.dec)}))});
-  const cross=sv('line',{y1:M.t,y2:H-M.b,stroke:'var(--ink2)','stroke-width':1,opacity:0,'pointer-events':'none'});svg.append(cross);
+  let lastY=-99;ends.forEach(e=>{let y=sy(e.v)+4;if(y-lastY<13)y=lastY+13;lastY=y;svg.append(sv('text',{x:sx(e.y)+8,y,'font-size':12,'font-weight':600,fill:'var(--ink)',text:fmt(e.v,o.dec)}))});
+  const cross=sv('line',{y1:M.t,y2:H-M.b,stroke:'var(--muted)','stroke-width':1,opacity:0,'pointer-events':'none'});svg.append(cross);
   const hit=sv('rect',{x:M.l-10,y:M.t,width:PW+20,height:PH+10,fill:'transparent'});svg.append(hit);
   const at=ev=>{const r=svg.getBoundingClientRect(),mx=(ev.clientX-r.left)*(W/r.width);let b=YEARS[0],bd=1e9;YEARS.forEach(y=>{const d=Math.abs(sx(y)-mx);if(d<bd){bd=d;b=y}});return b};
-  const move=ev=>{const y=at(ev);cross.setAttribute('x1',sx(y));cross.setAttribute('x2',sx(y));cross.setAttribute('opacity',1);
-    const nodes=[h('div',{class:'tt',text:`${o.title} · ${y}`})];series.forEach(s=>nodes.push(rowTip(s.name,s.v[y]==null?'tidak tersedia':fmt(s.v[y],o.dec)+(o.unit||''),s.color,s.dash)));
-    if(o.flag&&o.flag(y))nodes.push(h('div',{class:'tw',text:o.flag(y)}));showTip(ev,nodes)};
-  hit.addEventListener('pointermove',move);hit.addEventListener('pointerleave',()=>{cross.setAttribute('opacity',0);hideTip()});
+  hit.addEventListener('pointermove',ev=>{const y=at(ev);cross.setAttribute('x1',sx(y));cross.setAttribute('x2',sx(y));cross.setAttribute('opacity',1);
+    const nodes=[h('div',{class:'tt',text:`${o.title}, ${y}`})];series.forEach(s=>nodes.push(rowTip(s.name,s.v[y]==null?'tidak tersedia':fmt(s.v[y],o.dec)+(o.unit||''),s.color)));
+    if(o.flag&&o.flag(y))nodes.push(h('div',{class:'tw',text:o.flag(y)}));showTip(ev,nodes)});
+  hit.addEventListener('pointerleave',()=>{cross.setAttribute('opacity',0);hideTip()});
   box.append(svg);
 }
 
 /* ---------- profil ---------- */
 const TILES=[
-  ['X','Laju PDRB rata-rata geometrik','%/tahun',2,()=>BX,'ambang nasional'],
-  ['cagr_bekerja','Pertumbuhan penduduk bekerja (CAGR)','%/tahun',2,()=>D.meta.ambang_y,'ambang nasional'],
-  ['delta_epr','Perubahan rasio bekerja-penduduk (EPR)','pp/tahun',2,()=>natDeltaEPR,'nasional'],
+  ['X','Laju PDRB rata-rata','%/tahun',2,()=>BX,'Indonesia'],
+  ['cagr_bekerja','Pertumbuhan penduduk bekerja','%/tahun',2,()=>D.meta.ambang_y,'Indonesia'],
+  ['delta_epr','Perubahan rasio bekerja-penduduk','poin/tahun',2,()=>natDeltaEPR,'Indonesia'],
   ['tpt_akhir',`TPT Agustus ${LAST}`,'%',2,()=>NAS[LAST].tpt_agu,'Indonesia'],
   ['informal_akhir',`Pekerja informal ${LAST}`,'%',1,()=>NAS[LAST].informal,'Indonesia'],
   ['setengah_akhir',`Setengah pengangguran ${LAST}`,'%',1,()=>NAS[LAST].setengah_pengangguran,'Indonesia'],
@@ -672,46 +975,50 @@ const TILES=[
   ['pangsa_pertanian_kerja','Pangsa pekerja di pertanian','%',1,null],
   ['produktivitas','Produktivitas PDRB per pekerja','juta Rp',1,null]
 ];
-const PROFSERIES=[['laju_pdrb','Laju PDRB (%)',2,'%'],['pertumbuhan_bekerja','Pertumbuhan penduduk bekerja (%)',2,'%'],['tpt','TPT (%)',2,'%'],['epr','EPR (%)',2,'%'],['informal','Pekerja informal (%)',2,'%'],['setengah','Setengah pengangguran (%)',2,'%']];
+const PROFSERIES=[['laju_pdrb','Laju PDRB (%)',2],['pertumbuhan_bekerja','Pertumbuhan penduduk bekerja (%)',2],['tpt','TPT (%)',2],['epr','EPR (%)',2],['informal','Pekerja informal (%)',2],['setengah','Setengah pengangguran (%)',2]];
 function renderProfile(){
   const n=state.sel,isRaya=n==='Papua Raya',p=isRaya?null:byName[n];
-  $('#selProv').value=n;
+  $('#selProv').value=n;$('#profName').textContent=n;
   const head=$('#profHead');head.replaceChildren();
-  head.append(h('h3',{style:'font-size:18px',text:n}));
-  if(!isRaya)head.append(h('span',{class:'badge',text:p.wilayah}));
-  const q=isRaya?rayaQ():(p.kuadran?qOfProv(p):null);
-  if(q)head.append(h('span',{class:'badge'},[qIcon(q,13),`${q} · ${QD[q].nama}`]));
-  else head.append(h('span',{class:'badge',text:'Tanpa kuadran (batas wilayah berubah)'}));
-  if(p&&p.kuadran){head.append(h('span',{class:'badge',text:p.stab_kuat?'Label kuat':'Label lemah'}));if(p.klaster_kmeans)head.append(h('span',{class:'badge',title:'Klaster K-Means bersifat eksploratif dan tidak stabil',text:`Klaster ${p.klaster_kmeans} (eksploratif)`}))}
+  head.append(h('span',{class:'badge',text:isRaya?'Gabungan enam provinsi':p.wilayah}));
+  const q=selQuad(n);
+  head.append(q?qBadge(q):h('span',{class:'badge',text:'Tanpa kuadran: batas wilayah berubah'}));
+  if(p&&p.kuadran){head.append(h('span',{class:'badge',text:p.stab_kuat?'Label kuat':'Label lemah'}));if(p.klaster_kmeans)head.append(h('span',{class:'badge',title:'Klaster K-Means bersifat eksploratif dan belum stabil',text:`Klaster ${p.klaster_kmeans}, eksploratif`}))}
   const T=$('#profTiles');T.replaceChildren();
   const src=isRaya?{X:RAYA.X,cagr_bekerja:RAYA.cagr_bekerja,delta_epr:RAYA.delta_epr,tpt_akhir:RAYA.tpt_akhir}:p;
   TILES.forEach(([k,lab,unit,d,ref,refn])=>{
     const v=src&&src[k]!=null?src[k]:null,arr=PROV.filter(x=>x.kuadran&&x[k]!=null).map(x=>x[k]),med=median(arr);
-    let rk=null;if(v!=null&&!isRaya&&p.kuadran){rk=arr.filter(a=>a>v).length+1}
+    const rk=v!=null&&!isRaya&&p.kuadran?arr.filter(a=>a>v).length+1:null;
     const dl=[];
-    if(v!=null&&ref)dl.push(h('span',{},[`${refn}: `,h('b',{text:fmt(ref(),d)}),` (selisih ${fmtS(v-ref(),d)})`]));
-    else if(v!=null&&med!=null)dl.push(h('span',{},['median 32 provinsi: ',h('b',{text:fmt(med,d)})]));
-    if(rk)dl.push(h('span',{},[h('br'),`urutan ke-${rk} tertinggi dari ${arr.length}`]));
-    T.append(h('div',{class:'tile'},[h('div',{class:'l',text:lab}),h('div',{class:'v'},[fmt(v,d),h('small',{text:v==null?'':unit})]),h('div',{class:'d'},dl.length?dl:[v==null?'tidak tersedia':''])]));
+    if(v!=null&&ref)dl.push(h('span',{},[`${refn} `,h('b',{text:fmt(ref(),d)}),`, selisih ${fmtS(v-ref(),d)}`]));
+    else if(v!=null&&med!=null)dl.push(h('span',{},['Median 32 provinsi ',h('b',{text:fmt(med,d)})]));
+    if(rk)dl.push(h('br'),`Urutan ke-${rk} tertinggi dari ${arr.length}`);
+    T.append(h('div',{class:'cell'},[h('div',{class:'l',text:lab}),h('div',{class:'v tnum'},[fmt(v,d),h('small',{text:v==null?'':unit})]),h('div',{class:'d'},dl.length?dl:[v==null?'Tidak tersedia':''])]));
   });
   const lg=$('#profLegend');lg.replaceChildren(...[h('span',{class:'it'},[h('span',{class:'lk'}),n]),h('span',{class:'it'},[h('span',{class:'lk',style:'border-top-color:var(--nat)'}),'Indonesia']),(n==='Papua'||n==='Papua Barat')?h('span',{class:'it',text:'Penanda berongga: nilai berbatas wilayah lama (†)'}):null].filter(Boolean));
   const C=$('#profCharts');C.replaceChildren();
-  PROFSERIES.forEach(([m,t,d,u])=>{
+  PROFSERIES.forEach(([m,t,d])=>{
     const M=METRIK[m],v={},nv={};YEARS.forEach(y=>{v[y]=getVal(n,m,y);nv[y]=M.nat?M.nat(y):null});
-    const box=h('div',{class:'chartbox'},[h('h3',{text:t})]);const holder=h('div',{});box.append(holder);C.append(box);
+    const holder=h('div',{class:'chart'});C.append(h('div',{class:'tile'},[h('h3',{text:t}),holder]));
     const hollow=y=>oldB(n,m,y);
-    requestAnimationFrame(()=>lineChart(holder,[{name:n,color:'var(--s1)',v,hollow},{name:'Indonesia',color:'var(--nat)',v:nv}],{title:t,dec:d,unit:u==='%'?'%':'',flag:y=>hollow(y)?'† Nilai mencakup wilayah sebelum pemekaran Papua.':(isRaya&&m==='pertumbuhan_bekerja'&&y===2023?'Lonjakan 2023 mengikuti lonjakan penduduk 15+ (kemungkinan penimbang), bukan kenaikan EPR.':''),aria:`${t}, ${n} dibanding Indonesia, 2021–2025`}));
+    requestAnimationFrame(()=>lineChart(holder,[{name:n,color:'var(--s1)',v,hollow},{name:'Indonesia',color:'var(--nat)',v:nv}],{title:t,dec:d,unit:'%',flag:y=>hollow(y)?'† Nilai mencakup wilayah sebelum pemekaran Papua.':(isRaya&&m==='pertumbuhan_bekerja'&&y===2023?'Lonjakan 2023 mengikuti lonjakan penduduk 15+ (kemungkinan penimbang), bukan kenaikan EPR.':''),aria:`${t}, ${n} dibanding Indonesia, 2021–2025`}));
   });
   const nt=[];
-  if(isRaya)nt.push('Papua Raya digabung dari level enam provinsi (batas tetap). Pekerja 2022→2023 melonjak sekitar 24%, sama dengan lonjakan penduduk 15+, sedangkan EPR hampir tetap, sehingga basis 2023 dipakai. Informal dan setengah pengangguran belum tersedia sebagai gabungan.');
-  else if(PAPUA6.has(n))nt.push('Provinsi Papua tidak dianalisis dalam kuadran karena batas wilayah berubah pada pemekaran 2022. Pada tahun sebelum 2024, angka ketenagakerjaan Papua dan Papua Barat mencakup wilayah lama (penanda berongga). Lihat “Papua Raya” pada daftar provinsi.');
-  if(p&&p.kuadran&&!p.stab_kuat)nt.push(`Label lemah: berada di kuadran ini pada ${p.stab_konsisten_tahunan} dari 3 kuadran tahunan (${[2023,2024,2025].map(t=>`${t}: ${p['stab_tahun_'+t]}`).join(', ')}); dengan sumbu Y alternatif menjadi ${p.stab_kuadran_y_alternatif}.`);
-  else if(p&&p.kuadran)nt.push(`Label kuat: ${p.stab_konsisten_tahunan} dari 3 kuadran tahunan sama (${[2023,2024,2025].map(t=>`${t}: ${p['stab_tahun_'+t]}`).join(', ')}) dan tidak berpindah bila sumbu Y diganti.`);
+  if(isRaya)nt.push('Papua Raya digabung dari level enam provinsi dengan batas tetap. Pekerja 2022→2023 melonjak sekitar 24%, sama dengan lonjakan penduduk 15+, sedangkan EPR hampir tetap, sehingga basis 2023 dipakai. Informal dan setengah pengangguran belum tersedia sebagai gabungan.');
+  else if(PAPUA6.has(n))nt.push('Provinsi Papua tidak dianalisis dalam kuadran karena batas wilayah berubah pada pemekaran 2022. Sebelum 2024, angka ketenagakerjaan Papua dan Papua Barat mencakup wilayah lama (penanda berongga). Pilih Papua Raya untuk melihat gabungannya.');
+  if(p&&p.kuadran)nt.push(p.stab_kuat?`Label kuat: ${p.stab_konsisten_tahunan} dari 3 kuadran tahunan sama (${[2023,2024,2025].map(t=>`${t}: ${p['stab_tahun_'+t]}`).join(', ')}) dan tidak berpindah bila sumbu Y diganti.`:`Label lemah: berada di kuadran ini pada ${p.stab_konsisten_tahunan} dari 3 kuadran tahunan (${[2023,2024,2025].map(t=>`${t}: ${p['stab_tahun_'+t]}`).join(', ')}); dengan sumbu Y alternatif menjadi ${p.stab_kuadran_y_alternatif}.`);
   $('#profNote').textContent=nt.join(' ');
-  say(`${n} dipilih`);
+}
+function updateSelPill(){
+  const b=$('#selPill'),q=selQuad(state.sel);
+  b.replaceChildren(q?qIcon(q,10):icon('pin'),h('span',{text:state.sel}),icon('chev'));
+  b.setAttribute('aria-label',`Provinsi terpilih: ${state.sel}. Buka profil`);
 }
 function select(n){
-  state.sel=n;updateMap();renderScatter();renderQCards();renderProfile();
+  state.sel=n;updateSelPill();updateMap();renderQCards();
+  if(state.tab==='kuadran'){renderScatter();renderScInsp()}
+  if(state.tab==='profil')renderProfile();
+  say(`${n} dipilih`);
 }
 
 /* ---------- ringkasan ---------- */
@@ -720,10 +1027,16 @@ function pearson(a,b){const n=a.length,ma=a.reduce((s,x)=>s+x,0)/n,mb=b.reduce((
 function spearman(a,b){const ra=rank(a),rb=rank(b),rho=pearson(ra,rb);let s=12345;const rnd=()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
   let ge=0;const B=4000,rbb=rb.slice();for(let k=0;k<B;k++){for(let i=rbb.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[rbb[i],rbb[j]]=[rbb[j],rbb[i]]}if(Math.abs(pearson(ra,rbb))>=Math.abs(rho)-1e-12)ge++}return{rho,p:(ge+1)/(B+1)}}
 function rich(t){return t.split(/(<b>.*?<\/b>)/).filter(Boolean).map(x=>x.startsWith('<b>')?h('b',{text:x.slice(3,-4)}):x)}
+function syncMapControls(){$('#selMetrik').value=state.metrik;setSeg($('#segMode'),state.mode);const yr=$('#yr');yr.value=state.tahun;setYearFill();$('#yrOut').textContent=state.tahun}
+function natSeries(){const nat=f=>{const o={};YEARS.forEach(y=>o[y]=f(y));return o};return[{name:'Laju PDRB',color:'var(--s1)',v:nat(y=>NAS[y].laju_pdrb)},{name:'Pertumbuhan penduduk bekerja',color:'var(--s2)',v:nat(natGrowth),hollow:y=>y===2022},{name:'TPT',color:'var(--s3)',v:nat(y=>NAS[y].tpt_agu)}]}
+function drawNational(){
+  const box=$('#natChart');const W=box.clientWidth||800;
+  lineChart(box,natSeries(),{title:'Indonesia',dec:2,unit:'%',h:W<560?250:320,rm:48,aria:'Laju PDRB, pertumbuhan penduduk bekerja, dan TPT nasional 2021–2025',flag:y=>y===2022?'Penanda berongga: pertumbuhan 2022 dihitung terhadap 2021 yang memakai penimbang SUPAS 2015.':''});
+}
 function renderResults(){
   const main=PROV.filter(p=>p.kuadran),ym=state.ymode;
   const sp=spearman(main.map(p=>p.X),main.map(p=>p[ym]));
-  const sub=main.filter(p=>p.X<8);const sp2=spearman(sub.map(p=>p.X),sub.map(p=>p[ym]));
+  const sub=main.filter(p=>p.X<8),sp2=spearman(sub.map(p=>p.X),sub.map(p=>p[ym]));
   const ratio=median(main.filter(p=>p.cagr_bekerja>0).map(p=>p.cagr_pend15/p.cagr_bekerja))*100;
   const kuat=main.filter(p=>p.stab_kuat).length,kons=main.filter(p=>p.stab_konsisten_tahunan>=2).length;
   const cnt={};Object.keys(QD).forEach(q=>cnt[q]=main.filter(p=>qOfProv(p)===q).length);
@@ -731,112 +1044,112 @@ function renderResults(){
   const g25=natGrowth(2025),g24=natGrowth(2024);
   const natPop=(Math.pow(PROV.reduce((a,p)=>a+((SER[p.provinsi].penduduk15||{})[2025]||0),0)/PROV.reduce((a,p)=>a+((SER[p.provinsi].penduduk15||{})[2022]||0),0),1/3)-1)*100;
   const ARI=EX.sens_klaster.map(r=>r.ARI),sil=EX.pemilihan_k.find(r=>r.k===5);
-  const sigText=sp.p<.05?`Ada hubungan monoton yang nyata secara statistik pada n = ${main.length}.`:'Tidak ada bukti hubungan monoton antara laju PDRB dan penyerapan kerja pada n = '+main.length+'.';
+  const goMap=m=>()=>{state.metrik=m;state.mode='metrik';state.tahun=LAST;syncMapControls();go('peta')};
+  // hero
+  $('#heroTitle').replaceChildren('Ekonomi ',h('span',{class:'nw',text:`tumbuh ${fmt(NAS[LAST].laju_pdrb)}%.`}),h('br'),'Jumlah pekerja ',h('span',{class:'nw',text:`bertambah ${fmt(g25)}%.`}));
+  $('#heroSub').textContent=`Setahun sebelumnya pekerja masih bertambah ${fmt(g24)}%. Di provinsi mana pertumbuhan ekonomi ikut membuka lapangan kerja?`;
+  $('#natLead').textContent=`Laju PDRB bertahan di kisaran ${fmt(NAS[2023].laju_pdrb)}–${fmt(NAS[LAST].laju_pdrb)}% sejak 2023, sementara pertumbuhan jumlah pekerja turun tajam pada 2025.`;
+  $('#natLegend').replaceChildren(...natSeries().map(s=>h('span',{class:'it'},[h('span',{class:'lk',style:`border-top-color:${s.color}`}),s.name])));
+  $('#natNote').textContent='Semua garis dalam persen pada satu sumbu. Penanda berongga: pertumbuhan pekerja 2022 dihitung terhadap 2021 yang memakai penimbang SUPAS 2015, sehingga tidak sepenuhnya sebanding.';
+  // stats
+  const l25=NAS[2025],l24=NAS[2024],K=$('#kpi');K.replaceChildren();
+  [['Laju PDRB 2025',l25.laju_pdrb,l24.laju_pdrb,'2024'],['TPT Agustus 2025',l25.tpt_agu,l24.tpt_agu,'Agustus 2024'],['EPR Agustus 2025',l25.epr_agu,l24.epr_agu,'Agustus 2024'],['Pekerja informal 2025',l25.informal,l24.informal,'2024'],['Setengah pengangguran 2025',l25.setengah_pengangguran,l24.setengah_pengangguran,'2024']]
+    .forEach(([l,v,v0,ref])=>K.append(h('div',{class:'stat'},[h('div',{class:'t-cap',text:l}),h('div',{class:'v tnum'},[fmt(v),h('small',{text:'%'})]),h('div',{class:'t-cap',text:`${fmtS(v-v0)} poin dari ${ref}`})])));
+  // temuan
+  const sigText=sp.p<.05?`Ada hubungan monoton yang nyata secara statistik pada n = ${main.length}.`:`Tidak ada bukti hubungan monoton antara laju PDRB dan penyerapan kerja pada n = ${main.length}.`;
   const F=[
-    ['Temuan 1 · Nasional',`PDRB stabil ±5%, pekerja melambat`,`Laju PDRB nasional bertahan ${fmt(NAS[2023].laju_pdrb)}–${fmt(NAS[LAST].laju_pdrb)}% pada 2023–2025, tetapi pertumbuhan jumlah pekerja turun dari <b>${fmt(g24)}%</b> (2024) menjadi <b>${fmt(g25)}%</b> (2025). TPT Agustus turun dari ${fmt(NAS[2021].tpt_agu)}% (2021) ke ${fmt(NAS[LAST].tpt_agu)}% (2025).`],
-    ['Temuan 2 · Antarprovinsi',`Pertumbuhan tinggi belum tentu menyerap kerja`,`Korelasi Spearman laju PDRB dengan ${YM[ym].short.toLowerCase()}: <b>rho = ${fmt(sp.rho)}</b> (p permutasi = ${fmt(sp.p,3)}). Tanpa Maluku Utara dan Sulawesi Tengah (n = ${sub.length}): rho = ${fmt(sp2.rho)} (p = ${fmt(sp2.p,3)}). ${sigText} Ini asosiasi, bukan sebab-akibat.`],
-    ['Temuan 3 · Penduduk',`Sebagian besar tambahan pekerja mengikuti penduduk`,`Pada median provinsi, pertambahan penduduk 15+ setara <b>${fmt(ratio,0)}%</b> dari pertumbuhan jumlah pekerja (periode ${D.meta.periode_utama}). Nasional: pekerja ${fmt(D.meta.ambang_y)}%/tahun, penduduk 15+ ${fmt(natPop)}%/tahun, EPR naik ${fmt(natDeltaEPR)} poin persen/tahun. Jadi sebagian kenaikan jumlah pekerja bukan kenaikan porsi penduduk yang bekerja.`],
-    ['Temuan 4 · Tipologi',`${qmax} paling banyak (${cnt[qmax]} provinsi)`,`Q1 ${cnt.Q1} · Q2 ${cnt.Q2} · Q3 ${cnt.Q3} · Q4 ${cnt.Q4} provinsi (sumbu Y: ${YM[ym].short}). Hanya <b>${kuat} dari ${main.length}</b> yang berlabel kuat, dan ${kons} dari ${main.length} konsisten minimal 2 dari 3 kuadran tahunan. Kuadran periode pendek rentan terhadap guncangan satu tahun.`],
-    ['Temuan 5 · Papua Raya',`${rayaQ()}, tetapi dengan catatan`,`Enam provinsi Papua digabung dari level: laju PDRB ${fmt(RAYA.tahunan[2023].laju_pdrb)}% (2023), ${fmt(RAYA.tahunan[2024].laju_pdrb)}% (2024), ${fmt(RAYA.tahunan[2025].laju_pdrb)}% (2025). Pekerja 2022→2023 melonjak ${fmt(RAYA.tahunan[2023].pertumbuhan_bekerja,1)}% bersama penduduk 15+, sedangkan EPR hampir tetap, sehingga basis 2023 dipakai.`],
-    ['Temuan 6 · Klaster',`Klaster K-Means belum stabil`,`Pada k = 5 (silhouette ${fmt(sil.silhouette,3)}) terdapat klaster beranggota satu provinsi dan kesesuaian antarversi rendah (ARI ${ARI.map(a=>fmt(a,2)).join(' dan ')}). Klaster hanya dipakai sebagai eksplorasi pada profil provinsi, bukan temuan utama.`]
+    [null,'PDRB stabil, pertumbuhan pekerja melambat',`Laju PDRB nasional ${fmt(NAS[2023].laju_pdrb)}–${fmt(NAS[LAST].laju_pdrb)}% pada 2023–2025, tetapi pertumbuhan jumlah pekerja turun dari <b>${fmt(g24)}%</b> (2024) menjadi <b>${fmt(g25)}%</b> (2025). TPT Agustus turun dari ${fmt(NAS[2021].tpt_agu)}% (2021) ke ${fmt(NAS[LAST].tpt_agu)}% (2025).`,'Lihat pertumbuhan pekerja di peta',goMap('pertumbuhan_bekerja')],
+    ['ρ '+fmt(sp.rho),'Pertumbuhan tinggi belum tentu menyerap kerja',`Korelasi Spearman laju PDRB dengan ${YM[ym].short.toLowerCase()} <b>${fmt(sp.rho)}</b> (p permutasi ${fmt(sp.p,3)}). Tanpa Maluku Utara dan Sulawesi Tengah (n = ${sub.length}): ${fmt(sp2.rho)} (p ${fmt(sp2.p,3)}). ${sigText} Ini asosiasi, bukan sebab-akibat.`,'Lihat diagram kuadran',()=>go('kuadran')],
+    [fmt(ratio,0)+'%','Tambahan pekerja sebagian besar mengikuti penduduk',`Pada median provinsi, pertambahan penduduk 15+ setara <b>${fmt(ratio,0)}%</b> dari pertumbuhan jumlah pekerja. Nasional: pekerja ${fmt(D.meta.ambang_y)}%/tahun, penduduk 15+ ${fmt(natPop)}%/tahun, EPR naik ${fmt(natDeltaEPR)} poin per tahun.`,'Lihat EPR di peta',goMap('epr')],
+    [`${kuat} dari ${main.length}`,'Tipologi tiga tahun mudah bergeser',`${qmax} paling banyak (${cnt[qmax]} provinsi): Q1 ${cnt.Q1}, Q2 ${cnt.Q2}, Q3 ${cnt.Q3}, Q4 ${cnt.Q4}. Hanya <b>${kuat} provinsi</b> berlabel kuat, dan ${kons} konsisten minimal 2 dari 3 kuadran tahunan.`,'Lihat anggota kuadran',()=>go('kuadran')],
+    [{q:rayaQ()},'Papua Raya, dengan catatan',`Enam provinsi Papua digabung dari level: laju PDRB ${fmt(RAYA.tahunan[2023].laju_pdrb)}% (2023), ${fmt(RAYA.tahunan[2024].laju_pdrb)}% (2024), ${fmt(RAYA.tahunan[2025].laju_pdrb)}% (2025). Pekerja 2022→2023 melonjak ${fmt(RAYA.tahunan[2023].pertumbuhan_bekerja,1)}% bersama penduduk 15+, sedangkan EPR hampir tetap, sehingga basis 2023 dipakai.`,'Buka profil Papua Raya',()=>{select('Papua Raya');go('profil')}],
+    [null,'Klaster K-Means belum stabil',`Pada k = 5 (silhouette ${fmt(sil.silhouette,3)}) ada klaster beranggota satu provinsi, dan kesesuaian antarversi rendah (ARI ${ARI.map(a=>fmt(a,2)).join(' dan ')}). Klaster hanya dipakai sebagai eksplorasi di profil provinsi.`,'Lihat metode',()=>go('data')]
   ];
   const box=$('#findings');box.replaceChildren();
-  F.forEach(([k,t,txt])=>{box.append(h('div',{class:'find'},[h('div',{class:'k',text:k}),h('h3',{text:t}),h('p',{},rich(txt))]))});
-  // nasional
-  const nat=(f)=>{const o={};YEARS.forEach(y=>o[y]=f(y));return o};
-  const S=[{name:'Laju PDRB',color:'var(--s1)',v:nat(y=>NAS[y].laju_pdrb)},{name:'Pertumbuhan penduduk bekerja',color:'var(--s2)',v:nat(natGrowth),hollow:y=>y===2022},{name:'TPT',color:'var(--s3)',v:nat(y=>NAS[y].tpt_agu)}];
-  const lg=$('#natLegend');lg.replaceChildren(...S.map(s=>h('span',{class:'it'},[h('span',{class:'lk',style:`border-top-color:${s.color}`}),s.name])));
-  const draw=()=>lineChart($('#natChart'),S,{title:'Indonesia',dec:2,unit:'%',h:240,rm:46,aria:'Laju PDRB, pertumbuhan penduduk bekerja, dan TPT nasional 2021–2025',flag:y=>y===2022?'Penanda berongga: pertumbuhan 2022 dihitung terhadap 2021 yang memakai penimbang SUPAS 2015.':''});
-  requestAnimationFrame(draw);
-  $('#natNote').textContent='Semua garis berunit persen pada satu sumbu. Penanda berongga: pertumbuhan pekerja 2022 dihitung terhadap 2021 yang memakai penimbang SUPAS 2015, sehingga tidak sepenuhnya sebanding.';
-  // median table
-  const V=[['pangsa_tambang_pdrb','Pangsa PDRB tambang (%)',1],['pangsa_pertanian_kerja','Pangsa pekerja pertanian (%)',1],['produktivitas','Produktivitas (juta Rp/pekerja)',1],['informal_akhir','Informal (%)',1],['setengah_akhir','Setengah pengangguran (%)',1],['tpt_akhir','TPT (%)',2]];
-  const mt=$('#medTable');mt.replaceChildren(h('thead',{},[h('tr',{},[h('th',{text:'Kuadran'}),h('th',{text:'n'}),...V.map(v=>h('th',{text:v[1]}))])]),h('tbody',{},Object.keys(QD).map(q=>{const mem=main.filter(p=>qOfProv(p)===q);return h('tr',{},[h('td',{class:'l'},[h('span',{style:'display:inline-flex;align-items:center;gap:6px'},[qIcon(q,12),`${q} ${QD[q].nama}`])]),h('td',{text:mem.length}),...V.map(v=>h('td',{text:fmt(median(mem.map(p=>p[v[0]])),v[2])}))])})));
-  // spearman notebook
-  $('#spNote').textContent=`Uji pada n = 32 dengan ${EX.korelasi_struktur.length} kombinasi; ambang Bonferroni p < ${fmt(.05/EX.korelasi_struktur.length,4)}. Hasil ini dari periode utama notebook (sumbu Y utama: CAGR).`;
+  /* urutan tampil: temuan korelasi memimpin, temuan tanpa angka besar mengambil satu baris penuh */
+  const card=([fig,t,txt,ln,fn],cls)=>{
+    const badge=fig&&typeof fig==='object'?h('div',{class:'qbadge'},[qIcon(fig.q,14),`${fig.q} · ${QD[fig.q].nama}`]):null,top=fig==null||badge?null:h('div',{class:'fig tnum',text:fig});
+    return h('article',{class:'tile find'+(cls?' '+cls:'')},[top,h('h3',{class:'t-h3',text:t}),badge,h('p',{},rich(txt)),chevLink(ln,fn)].filter(Boolean));
+  };
+  box.append(card(F[1],'lead'),card(F[0],'wide'),card(F[2]),card(F[3]),card(F[4]),card(F[5]));
+  // median per kuadran
+  const V=[['pangsa_tambang_pdrb','Pangsa PDRB tambang (%)',1],['pangsa_pertanian_kerja','Pekerja pertanian (%)',1],['produktivitas','Produktivitas (juta Rp)',1],['informal_akhir','Informal (%)',1],['setengah_akhir','Setengah peng. (%)',1],['tpt_akhir','TPT (%)',2]];
+  $('#medTable').replaceChildren(h('thead',{},[h('tr',{},[h('th',{text:'Kuadran'}),h('th',{text:'n'}),...V.map(v=>h('th',{text:v[1]}))])]),h('tbody',{},Object.keys(QD).map(q=>{const mem=main.filter(p=>qOfProv(p)===q);return h('tr',{},[h('td',{class:'l'},[h('span',{style:'display:inline-flex;align-items:center;gap:7px'},[qIcon(q,11),`${q} ${QD[q].nama}`])]),h('td',{text:mem.length}),...V.map(v=>h('td',{text:fmt(median(mem.map(p=>p[v[0]])),v[2])}))])})));
+  $('#spNote').textContent=`Uji pada n = 32 dengan ${EX.korelasi_struktur.length} kombinasi; ambang Bonferroni p < ${fmt(.05/EX.korelasi_struktur.length,4)}. Hasil dari periode utama notebook, sumbu Y utama (CAGR).`;
   $('#spTable').replaceChildren(h('thead',{},[h('tr',{},[h('th',{class:'l',text:'Variabel'}),h('th',{class:'l',text:'Terhadap'}),h('th',{text:'rho'}),h('th',{text:'p'}),h('th',{text:'p < 0,05'}),h('th',{text:'Lolos Bonferroni'})])]),h('tbody',{},EX.korelasi_struktur.map(r=>h('tr',{},[h('td',{class:'l',text:r.variabel}),h('td',{class:'l',text:r.hasil}),h('td',{text:fmt(r.rho)}),h('td',{text:fmt(r.p,3)}),h('td',{text:r.p<.05?'ya':'tidak'}),h('td',{text:r.bonferroni?'ya':'tidak'})]))));
   // papua raya
-  const pc=[['pdrb_adhk_milyar','PDRB ADHK (milyar Rp)',0],['laju_pdrb','Laju PDRB (%)',2],['bekerja','Pekerja (orang)',0],['pertumbuhan_bekerja','Pertumbuhan pekerja (%)',1],['penduduk15','Penduduk 15+ (orang)',0],['epr','EPR (%)',2],['tpt','TPT (%)',2],['batas_pekerja','Batas wilayah (pekerja)',null],['batas_pdrb','Batas wilayah (PDRB)',null]];
-  $('#prTable').replaceChildren(h('thead',{},[h('tr',{},[h('th',{class:'l',text:'Tahun'}),...pc.map(c=>h('th',{text:c[1]}))])]),h('tbody',{},YEARS.map(y=>h('tr',{},[h('td',{class:'l',text:y}),...pc.map(c=>{const v=RAYA.tahunan[y][c[0]];return h('td',{text:c[2]==null?v:fmt(v,c[2])})})]))));
-  $('#prNote').textContent=`Posisi: X = ${fmt(RAYA.X)}%/tahun, Y (basis 2023) = ${fmt(RAYA.Y)} → ${RAYA.kuadran}. Dengan basis pekerja 2022, Y = ${fmt(RAYA.Y_basis_2022)} → ${RAYA.kuadran_basis_2022}, yang tidak dipakai karena lonjakan 2022→2023 mengikuti penduduk 15+.`;
-  const L=$('#limits');L.replaceChildren(...[
-    'Kuadran bersifat deskriptif dan bukan bukti sebab-akibat. Ambang memakai angka nasional BPS; tipologi periode pendek (tiga tahun laju PDRB) peka terhadap guncangan satu tahun, karena itu label dibedakan kuat dan lemah.',
-    ...D.meta.catatan.filter(c=>!c.startsWith('Kunci peta')).map(c=>c),
-    'Jumlah penduduk bekerja memuat pertambahan penduduk usia kerja dan perubahan penimbang survei. Ukuran EPR (porsi penduduk 15+ yang bekerja) lebih tahan terhadap hal ini.',
-    'Pertumbuhan PDRB tahunan (kalender) dan Sakernas Agustus (potret satu bulan) tidak berada pada periode yang persis sama. Estimasi Sakernas memiliki galat sampling, sehingga selisih kecil tidak boleh ditafsirkan sebagai kenaikan atau penurunan.',
-    'Pada 2021–2023 sebagian angka Papua dan Papua Barat mencakup wilayah sebelum pemekaran; pada peta ditandai arsir (†).',
-    'Struktur ekonomi dan kualitas kerja bersifat eksploratif (n = 32, banyak uji, tidak ada yang lolos koreksi Bonferroni). PDRB sektoral ADHK 2010 mencakup migas dan tambang sehingga produktivitas provinsi tambang tinggi tanpa berarti pekerjanya sejahtera.',
-    'Peta adalah ilustrasi: sumber batas wilayah GeoJSON tidak dinyatakan oleh penyedia dan bentuknya disederhanakan.'
+  const pc=[['pdrb_adhk_milyar','PDRB ADHK (milyar Rp)',0],['laju_pdrb','Laju PDRB (%)',2],['bekerja','Pekerja (orang)',0],['pertumbuhan_bekerja','Pertumbuhan pekerja (%)',1],['penduduk15','Penduduk 15+ (orang)',0],['epr','EPR (%)',2],['tpt','TPT (%)',2],['batas_pekerja','Batas wilayah, pekerja',null],['batas_pdrb','Batas wilayah, PDRB',null]];
+  $('#prTable').replaceChildren(h('thead',{},[h('tr',{},[h('th',{class:'l',text:'Tahun'}),...pc.map(c=>h('th',{class:c[2]==null?'l':'',text:c[1]}))])]),h('tbody',{},YEARS.map(y=>h('tr',{},[h('td',{class:'l',text:y}),...pc.map(c=>{const v=RAYA.tahunan[y][c[0]];return h('td',{class:c[2]==null?'l':'',text:c[2]==null?v:fmt(v,c[2])})})]))));
+  $('#prNote').textContent=`Posisi: PDRB ${fmt(RAYA.X)}%/tahun, sumbu Y (basis 2023) ${fmt(RAYA.Y)}, masuk ${RAYA.kuadran}. Dengan basis pekerja 2022, sumbu Y menjadi ${fmt(RAYA.Y_basis_2022)} dan masuk ${RAYA.kuadran_basis_2022}; basis itu tidak dipakai karena lonjakan 2022→2023 mengikuti penduduk 15+.`;
+  $('#limits').replaceChildren(...[
+    'Kuadran bersifat deskriptif dan bukan bukti sebab-akibat. Ambang memakai angka nasional BPS. Tipologi tiga tahun laju PDRB peka terhadap guncangan satu tahun, karena itu label dibedakan kuat dan lemah.',
+    ...D.meta.catatan.filter(c=>!c.startsWith('Kunci peta')),
+    'Jumlah penduduk bekerja memuat pertambahan penduduk usia kerja dan perubahan penimbang survei. EPR (porsi penduduk 15+ yang bekerja) lebih tahan terhadap hal ini.',
+    'PDRB tahunan (kalender) dan Sakernas Agustus (potret satu bulan) tidak mencakup periode yang persis sama. Estimasi Sakernas memiliki galat sampling, jadi selisih kecil jangan dibaca sebagai kenaikan atau penurunan.',
+    'Pada 2021–2023 sebagian angka Papua dan Papua Barat mencakup wilayah sebelum pemekaran; di peta ditandai arsir (†).',
+    'Struktur ekonomi dan kualitas kerja bersifat eksploratif (n = 32, banyak uji, tidak ada yang lolos koreksi Bonferroni). PDRB sektoral ADHK 2010 mencakup migas dan tambang, sehingga produktivitas provinsi tambang tinggi tanpa berarti pekerjanya sejahtera.',
+    'Peta adalah ilustrasi: sumber batas wilayah GeoJSON tidak dinyatakan penyedia dan bentuknya disederhanakan.'
   ].map(t=>h('li',{text:t})));
-}
-
-/* ---------- KPI & hero ---------- */
-function renderHero(){
-  const g25=natGrowth(2025),g24=natGrowth(2024),l25=NAS[2025],l24=NAS[2024];
-  $('#heroBig').textContent=fmt(g25)+'%';
-  $('#heroCap').textContent=`pertumbuhan jumlah penduduk bekerja (Agustus 2025 terhadap Agustus 2024), turun dari ${fmt(g24)}% setahun sebelumnya, sementara PDRB tumbuh ${fmt(l25.laju_pdrb)}%.`;
-  $('#lede').textContent=`Dashboard ini membandingkan laju PDRB, penyerapan tenaga kerja, dan pengangguran di 38 provinsi. Tipologi kuadran dihitung untuk 32 provinsi non-Papua pada periode ${D.meta.periode_utama}; Papua ditampilkan sebagai gabungan (Papua Raya).`;
-  const K=$('#kpi');K.replaceChildren();
-  const tile=(l,v,u,d)=>K.append(h('div',{class:'tile'},[h('div',{class:'l',text:l}),h('div',{class:'v'},[v,h('small',{text:u})]),h('div',{class:'d'},d)]));
-  tile('Laju PDRB 2025',fmt(l25.laju_pdrb),'%',[`${fmtS(l25.laju_pdrb-l24.laju_pdrb)} poin vs 2024`]);
-  tile('TPT Agustus 2025',fmt(l25.tpt_agu),'%',[`${fmtS(l25.tpt_agu-l24.tpt_agu)} poin vs Agustus 2024`]);
-  tile('EPR Agustus 2025',fmt(l25.epr_agu),'%',[`${fmtS(l25.epr_agu-l24.epr_agu)} poin vs Agustus 2024`]);
-  tile('Pekerja informal 2025',fmt(l25.informal),'%',[`${fmtS(l25.informal-l24.informal)} poin vs 2024`]);
-  tile('Setengah pengangguran 2025',fmt(l25.setengah_pengangguran),'%',[`${fmtS(l25.setengah_pengangguran-l24.setengah_pengangguran)} poin vs 2024`]);
+  if(state.tab==='ringkasan')drawNational();
 }
 
 /* ---------- tabel ---------- */
-const COLS=[['provinsi','Provinsi',null,'l'],['wilayah','Wilayah',null,'l'],['kuadran','Kuadran',null,'l'],['label','Label',null,'l'],['X','PDRB (X, %/th)',2],['cagr_bekerja','CAGR bekerja (%/th)',2],['delta_epr','Δ EPR (pp/th)',2],['tpt_akhir','TPT 2025 (%)',2],['informal_akhir','Informal 2025 (%)',1],['setengah_akhir','Setengah peng. 2025 (%)',1],['pangsa_tambang_pdrb','Pangsa tambang (%)',1],['pangsa_pertanian_kerja','Pekerja pertanian (%)',1],['produktivitas','Produktivitas (juta Rp)',1],['klaster','Klaster',null,'l']];
+const COLS=[['provinsi','Provinsi',null,'l'],['wilayah','Wilayah',null,'l'],['kuadran','Kuadran',null,'l'],['label','Label',null,'l'],['X','PDRB (%/th)',2],['cagr_bekerja','CAGR bekerja (%/th)',2],['delta_epr','Δ EPR (poin/th)',2],['tpt_akhir','TPT 2025 (%)',2],['informal_akhir','Informal 2025 (%)',1],['setengah_akhir','Setengah peng. 2025 (%)',1],['pangsa_tambang_pdrb','Pangsa tambang (%)',1],['pangsa_pertanian_kerja','Pekerja pertanian (%)',1],['produktivitas','Produktivitas (juta Rp)',1],['klaster','Klaster',null,'l']];
 let sortKey='provinsi',sortDir=1;
 function tableRows(){
   return NAMES.map(n=>{const p=byName[n];return Object.assign({},p,{kuadran:p.kuadran?qOfProv(p):'–',label:p.kuadran?(p.stab_kuat?'kuat':'lemah'):'–',klaster:p.klaster_kmeans?`${p.klaster_kmeans}`:'–'})}).concat([{provinsi:'Papua Raya (gabungan)',wilayah:'Papua',kuadran:rayaQ(),label:'basis 2023',X:RAYA.X,cagr_bekerja:RAYA.cagr_bekerja,delta_epr:RAYA.delta_epr,tpt_akhir:RAYA.tpt_akhir,klaster:'–'}]);
 }
 function renderTable(){
   const rows=tableRows().sort((a,b)=>{const x=a[sortKey],y=b[sortKey];if(x==null&&y==null)return 0;if(x==null)return 1;if(y==null)return-1;return(typeof x==='number'&&typeof y==='number'?x-y:String(x).localeCompare(String(y),'id'))*sortDir});
-  const t=$('#mainTable');
-  const th=COLS.map(c=>h('th',{class:'sortable '+(c[3]||''),tabindex:0,role:'button','aria-sort':sortKey===c[0]?(sortDir>0?'ascending':'descending'):'none',
-    onclick:()=>{sortDir=sortKey===c[0]?-sortDir:1;sortKey=c[0];renderTable()},
-    onkeydown:e=>{if(e.key==='Enter')e.target.click()},
-    text:c[1]+(sortKey===c[0]?(sortDir>0?' ▲':' ▼'):'')}));
+  const th=COLS.map(c=>h('th',{class:'sortable '+(c[3]||''),tabindex:0,'aria-sort':sortKey===c[0]?(sortDir>0?'ascending':'descending'):'none',
+    onclick:()=>{sortDir=sortKey===c[0]?-sortDir:1;sortKey=c[0];renderTable()},onkeydown:e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.currentTarget.click()}}},[c[1],sortKey===c[0]?icon(sortDir>0?'up':'down'):null]));
   const body=rows.map(r=>h('tr',{},COLS.map(c=>h('td',{class:c[3]||'',text:c[2]==null?(r[c[0]]==null?'–':r[c[0]]):fmt(r[c[0]],c[2])}))));
-  t.replaceChildren(h('thead',{},[h('tr',{},th)]),h('tbody',{},body));
+  $('#mainTable').replaceChildren(h('thead',{},[h('tr',{},th)]),h('tbody',{},body));
 }
 function csv(rows,cols){const e=v=>{if(v==null)return'';const s=String(v);return/[",\n;]/.test(s)?`"${s.replace(/"/g,'""')}"`:s};return'﻿'+[cols.join(','),...rows.map(r=>cols.map(c=>e(r[c])).join(','))].join('\n')}
 async function download(name,text){
   /* Di Claude (artifact) unduhan harus lewat kapabilitas downloads; di berkas lokal atau hosting biasa dipakai tautan unduh. */
-  try{
-    const dl=window.claude&&window.claude.use?await window.claude.use('downloads'):null;
-    if(dl){await dl.save({filename:name,data:text});return}
-  }catch(e){if(e&&e.code==='declined')return}
+  try{const dl=window.claude&&window.claude.use?await window.claude.use('downloads'):null;if(dl){await dl.save({filename:name,data:text});return}}catch(e){if(e&&e.code==='declined')return}
   const a=h('a',{href:URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'})),download:name});document.body.append(a);a.click();a.remove();
 }
 
 /* ---------- init ---------- */
 const THEMES=['auto','light','dark'],TL={auto:'otomatis',light:'terang',dark:'gelap'};
-function applyTheme(t){if(t==='auto')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',t);$('#themeBtn').textContent='Tema: '+TL[t];try{localStorage.setItem('tema',t)}catch(e){}}
+function applyTheme(t){if(t==='auto')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',t);const b=$('#themeBtn');b.replaceChildren(icon(t));b.setAttribute('aria-label',`Tema ${TL[t]}. Ganti tema`);b.title=`Tema: ${TL[t]}`;try{localStorage.setItem('tema',t)}catch(e){}}
+function setYearFill(){const yr=$('#yr');yr.style.setProperty('--p',((+yr.value-2021)/4*100)+'%')}
 function init(){
   let t='auto';try{t=localStorage.getItem('tema')||'auto'}catch(e){}if(!THEMES.includes(t))t='auto';applyTheme(t);
   $('#themeBtn').addEventListener('click',()=>{const cur=document.documentElement.getAttribute('data-theme')||'auto';applyTheme(THEMES[(THEMES.indexOf(cur)+1)%3])});
-  $('#selMode').value=state.mode;$('#selY').value=state.ymode;$('#yr').value=state.tahun;$('#yrOut').textContent=state.tahun;
+  buildTabs();
   const sm=$('#selMetrik');Object.entries(METRIK).forEach(([k,M])=>sm.append(h('option',{value:k,text:M.label})));sm.value=state.metrik;
-  sm.addEventListener('change',()=>{state.metrik=sm.value;state.mode='metrik';$('#selMode').value='metrik';updateMap()});
-  const yr=$('#yr');yr.addEventListener('input',()=>{state.tahun=+yr.value;$('#yrOut').textContent=yr.value;updateMap();renderProfile()});
-  $('#selMode').addEventListener('change',e=>{state.mode=e.target.value;updateMap()});
-  $('#selY').addEventListener('change',e=>{state.ymode=e.target.value;updateMap();renderScatter();renderQCards();renderProfile();renderResults();renderTable()});
-  let timer=null;const pb=$('#playBtn');
-  pb.addEventListener('click',()=>{if(timer){clearInterval(timer);timer=null;pb.textContent='▶';return}
-    if(state.tahun>=LAST){state.tahun=YEARS[0];yr.value=state.tahun;$('#yrOut').textContent=state.tahun;state.mode='metrik';$('#selMode').value='metrik'}
-    pb.textContent='❚❚';updateMap();timer=setInterval(()=>{if(state.tahun>=LAST){clearInterval(timer);timer=null;pb.textContent='▶';return}state.tahun++;yr.value=state.tahun;$('#yrOut').textContent=state.tahun;updateMap();renderProfile()},1100)});
-  const rc=$('#regionChips');['Semua','Sumatera','Jawa','Bali–Nusa Tenggara','Kalimantan','Sulawesi','Maluku','Papua'].forEach(r=>rc.append(h('button',{type:'button',class:'chip','data-r':r,'aria-pressed':r==='Semua'?'true':'false',onclick:()=>setRegion(r),text:r})));
-  const sp=$('#selProv');
-  const og=(lab,list)=>h('optgroup',{label:lab},list.map(n=>h('option',{value:n,text:n})));
-  sp.append(og('32 provinsi analisis kuadran',PROV.filter(p=>p.kuadran).map(p=>p.provinsi).sort((a,b)=>a.localeCompare(b,'id'))),og('Papua (tanpa kuadran)',[...PAPUA6].sort()),og('Gabungan',['Papua Raya']));
+  sm.addEventListener('change',()=>{state.metrik=sm.value;state.mode='metrik';setSeg($('#segMode'),'metrik');updateMap()});
+  segmented($('#segMode'),[['metrik','Nilai'],['kuadran','Kuadran']],state.mode,v=>{state.mode=v;updateMap()});
+  segmented($('#segY'),Object.entries(YM).map(([k,v])=>[k,v.seg]),state.ymode,v=>{state.ymode=v;updateSelPill();updateMap();renderScatter();renderScInsp();renderQCards();renderResults();renderTable()},'lg');
+  const yr=$('#yr');yr.value=state.tahun;$('#yrOut').textContent=state.tahun;setYearFill();
+  yr.addEventListener('input',()=>{state.tahun=+yr.value;$('#yrOut').textContent=yr.value;setYearFill();updateMap()});
+  let timer=null;const pb=$('#playBtn');pb.replaceChildren(icon('play'));
+  const stop=()=>{clearInterval(timer);timer=null;pb.replaceChildren(icon('play'));pb.setAttribute('aria-label','Putar tahun')};
+  pb.addEventListener('click',()=>{if(timer){stop();return}
+    if(state.tahun>=LAST)state.tahun=YEARS[0];if(state.mode!=='metrik'){state.mode='metrik';setSeg($('#segMode'),'metrik')}
+    yr.value=state.tahun;$('#yrOut').textContent=state.tahun;setYearFill();updateMap();
+    pb.replaceChildren(icon('pause'));pb.setAttribute('aria-label','Jeda');
+    timer=setInterval(()=>{if(state.tahun>=LAST){stop();return}state.tahun++;yr.value=state.tahun;$('#yrOut').textContent=state.tahun;setYearFill();updateMap()},1100)});
+  const rc=$('#regionChips');['Semua','Sumatera','Jawa','Bali–Nusa Tenggara','Kalimantan','Sulawesi','Maluku','Papua'].forEach(r=>rc.append(h('button',{type:'button',class:'chip','data-r':r,'aria-pressed':String(r==='Semua'),onclick:()=>setRegion(r),text:r})));
+  const sp=$('#selProv');const og=(lab,list)=>h('optgroup',{label:lab},list.map(n=>h('option',{value:n,text:n})));
+  sp.append(og('32 provinsi dengan kuadran',PROV.filter(p=>p.kuadran).map(p=>p.provinsi).sort((a,b)=>a.localeCompare(b,'id'))),og('Papua, tanpa kuadran',[...PAPUA6].sort()),og('Gabungan',['Papua Raya']));
   sp.addEventListener('change',()=>select(sp.value));
-  buildMap();renderHero();renderScLegend();renderResults();renderTable();updateMap();renderScatter();renderQCards();renderProfile();
-  $('#csvProv').addEventListener('click',()=>{const r=tableRows();download('provinsi_kuadran.csv',csv(r,COLS.map(c=>c[0])))});
+  $('#csvProv').replaceChildren(icon('download'),'Tabel provinsi (CSV)');$('#csvPanel').replaceChildren(icon('download'),'Panel tahunan (CSV)');
+  $('#csvProv').addEventListener('click',()=>download('provinsi_kuadran.csv',csv(tableRows(),COLS.map(c=>c[0]))));
   $('#csvPanel').addEventListener('click',()=>download('panel_tahunan_38_provinsi.csv',csv(D.panel,Object.keys(D.panel[0]))));
-  let rt=null;new ResizeObserver(()=>{clearTimeout(rt);rt=setTimeout(()=>{updateMap();renderScatter();renderProfile();renderResults()},120)}).observe(document.body);
-  document.addEventListener('pointerdown',e=>{if(!e.target.closest('#map,#scatter,.chartbox'))hideTip()});
+  $('#selPill').addEventListener('click',()=>go('profil'));
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b){e.preventDefault();go(b.dataset.go)}});
+  buildMap();renderScLegend();renderTable();updateSelPill();renderResults();updateMap();renderQCards();
+  const initial=(location.hash||'').replace('#','');go(TABS.some(t=>t[0]===initial)?initial:'ringkasan',{keepScroll:true});
+  window.addEventListener('hashchange',()=>{const id=location.hash.replace('#','');if(id&&id!==state.tab&&TABS.some(t=>t[0]===id))go(id)});
+  const nav=$('#nav');const onScroll=()=>nav.classList.toggle('scrolled',scrollY>4);addEventListener('scroll',onScroll,{passive:true});onScroll();
+  let rt=null,lastW=innerWidth;new ResizeObserver(()=>{clearTimeout(rt);rt=setTimeout(()=>{$$('.seg').forEach(placeThumb);if(Math.abs(innerWidth-lastW)<2)return;lastW=innerWidth;renderPanel(state.tab)},140)}).observe(document.body);
+  document.addEventListener('pointerdown',e=>{if(!e.target.closest('#map,#scatter,.chart'))hideTip()});
+  document.addEventListener('scroll',e=>{if(e.target.classList&&e.target.classList.contains('tablewrap'))fadeEdge(e.target)},{capture:true,passive:true});
 }
 init();
 })();
